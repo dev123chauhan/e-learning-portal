@@ -35,7 +35,6 @@ const MetricItem = styled.div`
 
 const MetricValue = styled.div`
   font-size: 48px;
-  font-weight: bold;
   background: linear-gradient(to right, #49BBBD, #136CB5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
