@@ -547,6 +547,7 @@ function Header() {
             <li><Link to="/aboutus" onClick={toggleSidebar}>About Us</Link></li>
           </ul>
         </SidebarNav>
+        
         {user ? (
           <>
             <DropdownItem to="/profile" onClick={toggleSidebar}>
