@@ -4,6 +4,9 @@ import AuthForm from "./Component/Authorization/AuthForm";
 import UserProfile from "./Component/Profile/UserProfile";
 import Search from "./Component/Search/Search";
 import Course from "./Component/Course/Course";
+import ProfileDashboard from "./Component/Profile/ProfileDashboard";
+import CourseDetail from "./Component/CourseDetail/CourseDetail";
+import Meeting from "./Component/Meeting/Meeting";
 
 
 export default function App() {
@@ -15,7 +18,11 @@ export default function App() {
         <Route path="/auth" element={<AuthForm />} />
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/career" element={<Course />} />
+        <Route path="/dashboard" element={<ProfileDashboard />} />
+        <Route path="/blog" element={<CourseDetail />} />
+        <Route path="/aboutus" element={<Meeting />} />
       </Routes>
     </>
   );
 }
+

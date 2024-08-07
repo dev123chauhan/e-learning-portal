@@ -507,9 +507,9 @@ function Header() {
                   <FaUser />
                   My Profile
                 </DropdownItem>
-                <DropdownItem to="/settings">
+                <DropdownItem to="/dashboard">
                   <FaCog />
-                  Settings
+                  Dashboard
                 </DropdownItem>
                 <Divider />
                 <DropdownItem as="button" onClick={logout}>
@@ -554,9 +554,9 @@ function Header() {
               <FaUser />
               My Profile
             </DropdownItem>
-            <DropdownItem to="/settings" onClick={toggleSidebar}>
+            <DropdownItem to="/dashboard" onClick={toggleSidebar}>
               <FaCog />
-              Settings
+              Dashboard
             </DropdownItem>
             <DropdownItem as="button" onClick={() => { logout(); toggleSidebar(); }}>
               <FaSignOutAlt />
