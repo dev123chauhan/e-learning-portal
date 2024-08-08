@@ -16,7 +16,7 @@ router.post('/register', async (req, res) => {
     res.status(201).json('User registered!');
   } catch (error) {
     res.status(400).json('Error: ' + error);
-  }
+  } 
 });
 
 // Login Route

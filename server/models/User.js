@@ -9,8 +9,10 @@
       gender: { type: String, enum: ["Male", "Female", "Other"], default: "Male" },
       mobileNumber: { type: String, trim: true },
       dateOfBirth: { type: Date },
-      address: { type: String, trim: true },
+      address: { type: String, trim: true }, 
       date: { type: Date, default: Date.now },
+      role: { type: String, required: true, enum: ['student', 'educator'] },
+      courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
     },
     {
       timestamps: true,
