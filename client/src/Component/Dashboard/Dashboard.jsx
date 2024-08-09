@@ -109,7 +109,7 @@ const ScheduleIcon = () => (
 
 // Add other icons similarly...
 
-const Dashboard = styled.div`
+const DashboardDiv = styled.div`
   display: flex;
   min-height: 100vh;
 `;
@@ -169,9 +169,9 @@ const Icon = styled.div`
   margin-right: 10px;
 `;
 
-const ProfileDashboard = () => {
+const Dashboard = () => {
   return (
-    <Dashboard>
+    <DashboardDiv>
       <Sidebar>
         <NavMenu>
           <NavItem to="/dashboard">
@@ -199,8 +199,8 @@ const ProfileDashboard = () => {
           {/* Map through enrolled courses and render CourseCard for each */}
         </CourseList>
       </Content>
-    </Dashboard>
+    </DashboardDiv>
   );
 };
 
-export default ProfileDashboard;
+export default Dashboard;

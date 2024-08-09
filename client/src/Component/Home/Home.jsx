@@ -1,4 +1,3 @@
-import  { useState, useEffect } from 'react';
 import Banner from "./Banner";
 import CloudSoftware from "./CloudSoftware";
 import Header from "./Header";
@@ -16,18 +15,12 @@ const AppContainer = styled.div`
   background-color: #49BBBD;
 `;
 export default function Home() {
-  const [headerHeight, setHeaderHeight] = useState(0);
-  useEffect(() => {
-    const header = document.querySelector('header');
-    if (header) {
-      setHeaderHeight(header.offsetHeight);
-    }
-  }, []);
+
   return (
     <>
     <AppContainer>
       <Header/>
-      <Banner headerHeight={`${headerHeight}px`}/>
+      <Banner />
     </AppContainer>
       <Success/>
       <CloudSoftware/>

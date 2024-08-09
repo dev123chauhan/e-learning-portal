@@ -6,6 +6,8 @@ import Course from "./Component/Course/Course";
 import ProfileDashboard from "./Component/UserProfile/ProfileDashboard";
 import CourseDetail from "./Component/CourseDetail/CourseDetail";
 import Meeting from "./Component/Meeting/Meeting";
+import EnrolledCourse from "./Component/EnrolledCourse/EnrolledCourse";
+import Dashboard from "./Component/Dashboard/Dashboard";
 
 
 export default function App() {
@@ -17,9 +19,10 @@ export default function App() {
         <Route path="/auth" element={<AuthForm />} />
         <Route path="/profile" element={<ProfileDashboard />} />
         <Route path="/career" element={<Course />} />
-        {/* <Route path="/dashboard" element={<ProfileDashboard />} /> */}
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/blog" element={<CourseDetail />} />
         <Route path="/aboutus" element={<Meeting />} />
+        <Route path="/my-course" element={<EnrolledCourse />} />
       </Routes>
     </>
   );

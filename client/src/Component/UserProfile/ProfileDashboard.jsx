@@ -1,9 +1,5 @@
-
-
-
-
 import { useState } from "react";
-import { Container,  Grid, Paper } from "@mui/material";
+import {   Grid, Paper } from "@mui/material";
 import ProfileSidebar from "./ProfileSidebar";
 import UserProfile from "./UserProfile";
 import UpdateProfile from "./UpdateProfile";
@@ -29,7 +25,7 @@ const ProfileDashboard = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 15, mb: 4 }}>
+    <div>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4} lg={3}>
           <Paper>
@@ -42,7 +38,7 @@ const ProfileDashboard = () => {
           </Paper>
         </Grid>
       </Grid>
-    </Container>
+    </div>
   );
 };
 

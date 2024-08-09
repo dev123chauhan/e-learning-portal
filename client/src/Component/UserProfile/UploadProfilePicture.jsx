@@ -71,7 +71,7 @@ const UploadProfilePicture = () => {
           >
             <Avatar
               alt="Profile Picture"
-              src={preview || (user && user.profileImage) ? preview || `http://localhost:5000/uploads/${user.profileImage}` : ""}
+              src={preview || (user && user.profileImage) ? preview || `http://localhost:8000/uploads/${user.profileImage}` : ""}
               sx={{ width: 200, height: 200 }}
             />
             <CiEdit
