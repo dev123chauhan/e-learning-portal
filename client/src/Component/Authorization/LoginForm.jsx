@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import useAuth from "../../hooks/useAuth";
-const Form = styled.form`
+const Form = styled.form` 
   display: flex;
   flex-direction: column;
 `;

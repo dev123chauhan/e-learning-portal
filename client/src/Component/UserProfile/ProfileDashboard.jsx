@@ -27,15 +27,15 @@ const ProfileDashboard = () => {
   return (
     <div>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4} lg={3}>
+        <Grid item xs={12} md={4} lg={2}>
           <Paper>
             <ProfileSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
           </Paper>
         </Grid>
-        <Grid item xs={12} md={8} lg={9}>
-          <Paper sx={{ p: 2 }}>
+        <Grid item xs={12} md={8} lg={10}>
+          {/* <Paper sx={{ p: 2 }}> */}
             {renderContent()}
-          </Paper>
+          {/* </Paper> */}
         </Grid>
       </Grid>
     </div>

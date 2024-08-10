@@ -11,8 +11,8 @@
       dateOfBirth: { type: Date },
       address: { type: String, trim: true }, 
       date: { type: Date, default: Date.now },
-      role: { type: String, required: true, enum: ['student', 'educator'] },
-      courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
+      // role: { type: String, required: true, enum: ['student', 'educator'] },
+      // courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
     },
     {
       timestamps: true,

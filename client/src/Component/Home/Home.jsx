@@ -11,6 +11,8 @@ import Quiz from "./Quiz";
 import ClassManagement from "./ClassManagement";
 import OneOnOneDiscussions from "./OneOnOneDiscussion";
 import Footer from "./Footer";
+import Blog from "../Blog/Blog"
+import BlogList from "../Blog/BlogList";
 const AppContainer = styled.div`
   background-color: #49BBBD;
 `;
@@ -31,6 +33,8 @@ export default function Home() {
       <Quiz/>
       <ClassManagement/>
       <OneOnOneDiscussions/>
+      <Blog />
+      <BlogList />
       <Footer/>
       </>
   )

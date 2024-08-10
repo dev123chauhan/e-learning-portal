@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import VideoPlayer from './VideoPlayer';
+import VideoPlayerEnrolledCourse from './VideoPlayer';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 const PageContainer = styled.div`
   display: flex;
@@ -30,7 +34,8 @@ const Header = styled.div`
 const NavButton = styled.button`
   padding: 8px 16px;
   margin-left: 10px;
-  background-color: #007bff;
+  ${'' /* background-color: #d4fff1; */}
+  background-color: #49BBBD;
   color: white;
   border: none;
   border-radius: 4px;
@@ -38,8 +43,8 @@ const NavButton = styled.button`
 `;
 
 const VideoContainer = styled.div`
-  background-color: #2c3e50;
-  color: white;
+  ${'' /* background-color: #2c3e50; */}
+  color: black;
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -55,32 +60,86 @@ const Instructor = styled.p`
   margin-bottom: 20px;
 `;
 
-const SidebarSection = styled.div`
-  margin-bottom: 15px;
+// const SidebarSection = styled.div`
+//   margin-bottom: 15px;
+// `;
+
+// const SectionTitle = styled.h3`
+//   font-size: 18px;
+//   margin-bottom: 10px;
+// `;
+
+// const LessonList = styled.ul`
+//   list-style-type: none;
+//   padding: 0;
+// `;
+
+// const LessonItem = styled.li`
+//   margin-bottom: 8px;
+//   cursor: pointer;
+//   &:hover {
+//     color: #007bff;
+//   }
+// `;
+
+const AccordionSection = styled.div`
+  border-bottom: 1px solid #e0e0e0;
 `;
 
-const SectionTitle = styled.h3`
-  font-size: 18px;
-  margin-bottom: 10px;
-`;
-
-const LessonList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-`;
-
-const LessonItem = styled.li`
-  margin-bottom: 8px;
+const AccordionTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
   cursor: pointer;
-  &:hover {
-    color: #007bff;
-  }
+  font-weight: bold;
 `;
 
+const AccordionContent = styled.div`
+  padding-left: 20px;
+  max-height: ${props => (props.isOpen ? '1000px' : '0')};
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+`;
+
+const LessonItem = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  color: #666;
+  font-size: 14px;
+`;
+
+const LessonIcon = styled.span`
+  margin-right: 10px;
+  color: #2196f3;
+`;
+const SidebarTitle = styled.h2`
+  color: #2196f3;
+  font-size: 18px;
+  margin-bottom: 20px;
+`;
+function Accordion({ title, children }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <AccordionSection>
+      <AccordionTitle onClick={() => setIsOpen(!isOpen)}>
+        {title}
+        <span>{isOpen ? <MdOutlineKeyboardArrowDown /> : <MdOutlineKeyboardArrowRight />}</span>
+      </AccordionTitle>
+      <AccordionContent isOpen={isOpen}>{children}</AccordionContent>
+    </AccordionSection>
+  );
+}
+Accordion.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node
+};
 function EnrolledCourse() {
   return (
     <PageContainer>
-      <Sidebar>
+      {/* <Sidebar>
         <h2>Course Content</h2>
         <SidebarSection>
           <SectionTitle>Getting Started</SectionTitle>
@@ -91,7 +150,36 @@ function EnrolledCourse() {
             <LessonItem>Setting up Environment</LessonItem>
           </LessonList>
         </SidebarSection>
-        {/* Add more sections here */}
+      </Sidebar> */}
+      <Sidebar>
+        <SidebarTitle>Course Content</SidebarTitle>
+        <Accordion title="Getting Started">
+          <LessonItem>
+            <LessonIcon>📘</LessonIcon>
+            Welcome to the course
+          </LessonItem>
+          <LessonItem>
+            <LessonIcon>🕒</LessonIcon>
+            What is React JS?
+          </LessonItem>
+          <LessonItem>
+            <LessonIcon>🕒</LessonIcon>
+            Why React but not JavaScript ?
+          </LessonItem>
+          <LessonItem>
+            <LessonIcon>📘</LessonIcon>
+            Setting up Environment
+          </LessonItem>
+        </Accordion>
+        <Accordion title="JavaScript refresher" />
+        <Accordion title="React Basics & Working with Components" />
+        <Accordion title="React States & Working with events" />
+        <Accordion title="Rendering listings" />
+        <Accordion title="Styling React Components" />
+        <Accordion title="Debugging React Apps" />
+        <Accordion title="Practice : A complete project" />
+        <Accordion title="Diving Deeper" />
+        <Accordion title="Advance Topics" />
       </Sidebar>
       <MainContent>
         <Header>
@@ -105,7 +193,7 @@ function EnrolledCourse() {
         <VideoContainer>
           <CourseTitle>THE FULL STACK REACT COURSE</CourseTitle>
           <Instructor>BUILD AND DEPLOY AN E-COMMERCE APP</Instructor>
-          <VideoPlayer />
+          <VideoPlayerEnrolledCourse />
         </VideoContainer>
         <h2>Welcome to the course</h2>
         <p>
