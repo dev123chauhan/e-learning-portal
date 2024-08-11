@@ -296,7 +296,7 @@ function Header() {
                   My course
                 </DropdownItem>
                 <Divider />
-                <DropdownItem as="button" onClick={logout}>
+                <DropdownItem  onClick={logout}>
                   <FaSignOutAlt />
                   Logout
                 </DropdownItem>
@@ -343,7 +343,7 @@ function Header() {
               <FaCog />
               Dashboard
             </DropdownItem>
-            <DropdownItem as="button" onClick={() => { logout(); toggleSidebar(); }}>
+            <DropdownItem  onClick={() => { logout(); toggleSidebar(); }}>
               <FaSignOutAlt />
               Logout
             </DropdownItem>

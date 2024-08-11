@@ -9,10 +9,10 @@ import mail from "../../assets/email.png"
 const HeroContainer = styled.section`
   display: flex;
   flex-direction: column;
-  padding: 50px 20px;
+  ${'' /* padding: 50px 20px; */}
   align-items: center;
   color: white;
-  background-color: #49BBBD;
+  ${'' /* background-color: #49BBBD; */}
   min-height: 100vh;
 
   @media (min-width: 768px) {
