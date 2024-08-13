@@ -96,13 +96,13 @@ const StatsContainer = styled.div`
   gap: 20px;
 `;
 
-const Chart = styled.div`
-  flex: 1;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-`;
+// const Chart = styled.div`
+//   flex: 1;
+//   background-color: white;
+//   padding: 20px;
+//   border-radius: 10px;
+//   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+// `;
 
 const LeaderBoard = styled.div`
   margin-top: 20px;
@@ -191,15 +191,15 @@ function StudentDashboard() {
           <Card color="#f0fff0">Motion Design</Card>
         </CourseCards>
         <StatsContainer>
-          <Chart>
-            <h3>Hours Spent</h3>
+          {/* <Chart> */}
+          
             <StatisticsSection/>
-          </Chart>
-          <Chart>
-            <h3>Performance</h3>
+          {/* </Chart> */}
+          {/* <Chart> */}
+            
             {/* <Performance performanceValue={performanceValue} timeOptions={timeOptions} /> */}
             <Performance />
-          </Chart>
+          {/* </Chart> */}
         </StatsContainer>
         <LeaderBoard>
           <h3>Leader Board</h3>

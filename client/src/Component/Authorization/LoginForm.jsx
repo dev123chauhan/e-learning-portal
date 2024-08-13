@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import useAuth from "../../hooks/useAuth";
+import { FaRegEyeSlash, FaRegEye  } from "react-icons/fa";
 const Form = styled.form` 
   display: flex;
   flex-direction: column;
@@ -21,6 +22,7 @@ const Input = styled.input`
   border: 1px solid #ddd;
   border-radius: 25px;
   font-size: 16px;
+  width: 100%;
 `;
 
 const Button = styled.button`
@@ -54,9 +56,21 @@ const Checkbox = styled.div`
     margin-right: 10px;
   }
 `;
+const InputWrapper = styled.div`
+  position: relative;
+`;
 
+const ShowPasswordIcon = styled.div`
+  position: absolute;
+  top: 45%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #53BFBA;
+  font-size: 1.4rem;
+`;
 export default function LoginForm() {
-    // const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false); // State to manage loading spinner
@@ -88,7 +102,17 @@ export default function LoginForm() {
     <InputLabel>Email address</InputLabel>
     <Input type="email"  value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your User name" />
     <InputLabel>Password</InputLabel>
-    <Input type="password"  value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your Password" />
+    <InputWrapper>
+          <Input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your Password"
+          />
+          <ShowPasswordIcon onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ?  <FaRegEye /> : <FaRegEyeSlash /> }
+          </ShowPasswordIcon>
+        </InputWrapper>
     <Checkbox>
       <input type="checkbox" id="remember" />
       <label htmlFor="remember">Remember me</label>

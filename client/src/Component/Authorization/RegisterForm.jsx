@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from "axios"
 import { ClipLoader } from "react-spinners";
+import { FaRegEyeSlash, FaRegEye  } from "react-icons/fa";
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -19,6 +20,7 @@ const Input = styled.input`
   border: 1px solid #ddd;
   border-radius: 25px;
   font-size: 16px;
+  width: 100%;
 `;
 
 const Button = styled.button`
@@ -35,12 +37,25 @@ const Button = styled.button`
     background-color: #53BFBA;
   }
 `;
+const ShowPasswordIcon = styled.div`
+  position: absolute;
+  top: 43%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #53BFBA;
+  font-size: 1.4rem;
+`;
 
+const InputWrapper = styled.div`
+  position: relative;
+`;
 
 export default function RegisterForm() {
-     // const [showPassword, setShowPassword] = useState(false);
+     const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -76,7 +91,19 @@ export default function RegisterForm() {
       <InputLabel>Email Address</InputLabel>
       <Input type="email"   name="email"  value={formData.email} onChange={handleChange} placeholder="Enter your Email Address" />
       <InputLabel>Password</InputLabel>
-      <Input type="password"    name="password"  value={formData.password} onChange={handleChange} placeholder="Enter your Password" />
+      {/* <Input type="password"    name="password"  value={formData.password} onChange={handleChange} placeholder="Enter your Password" /> */}
+      <InputWrapper>
+          <Input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Enter your Password"
+          />
+          <ShowPasswordIcon onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? <FaRegEye /> : <FaRegEyeSlash /> }
+          </ShowPasswordIcon>
+        </InputWrapper>
       <Button type="submit">{loading ? <ClipLoader size={20} color={"#fff"} /> : "Register"}  </Button>
     </Form>
     </>
