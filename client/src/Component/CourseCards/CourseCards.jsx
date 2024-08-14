@@ -1,16 +1,11 @@
-import card1 from "../../assets/card1.png"
-import card2 from "../../assets/card2.png"
-import card3 from "../../assets/card3.png"
-import card4 from "../../assets/card4.png"
-import card5 from "../../assets/card5.png"
-import card6 from "../../assets/card6.png"
-import card7 from "../../assets/card7.png"
-import card8 from "../../assets/card8.png"
 import styled from 'styled-components';
 import noProfile from "../../assets/noProfile.jpg";
 import useAuth from "../../hooks/useAuth";
 import { IoMdTime } from "react-icons/io";
 import { RxDashboard } from "react-icons/rx";
+import axios from "axios"
+import { useEffect, useState } from "react"
+import PropTypes from 'prop-types';
 // Styled components for the card
 const CardGrid = styled.div`
   display: grid;
@@ -75,81 +70,7 @@ const Price = styled.div`
   color: #49BBBD;
 `;
 
-// Sample data
-const courses = [
-  {
-    id: 1,
-    image: card1,
-    title: "Html Css & Javascript",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    tag: "Design",
-    duration: "3 Month",
-    price: "$80"
-  },
-  {
-    id: 2,
-    image: card2,
-    title: "Python Fundamental",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    tag: "Design",
-    duration: "3 Month",
-    price: "$80"
-  },
-  {
-    id: 3,
-    image: card3,
-    title: "C Programming",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    tag: "Design",
-    duration: "3 Month",
-    price: "$80"
-  },
-  {
-    id: 4,
-    image: card4,
-    title: "C++",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    tag: "Design",
-    duration: "3 Month",
-    price: "$80"
-  },
-  {
-    id: 5,
-    image: card5,
-    title: "React",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    tag: "Design",
-    duration: "3 Month",
-    price: "$80"
-  },
-  {
-    id: 6,
-    image: card6,
-    title: "Node.Js",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    tag: "Design",
-    duration: "3 Month",
-    price: "$80"
-  },
-  {
-    id: 7,
-    image: card7,
-    title: "Mongodb",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    tag: "Design",
-    duration: "3 Month",
-    price: "$80"
-  },
-  {
-    id: 8,
-    image: card8,
-    title: "Java",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    tag: "Design",
-    duration: "3 Month",
-    price: "$80"
-  },
-];
+
 const ProfileImage = styled.img`
   border-radius: 50%;
   width: 45px;
@@ -164,13 +85,31 @@ const ProfileImage = styled.img`
 `;
 
 // Main component
-const CourseCards = () => {
+const CourseCards = ({ searchTerm }) => {
+  const [courses, setCourses] = useState([]);
   const { user } = useAuth();
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/courses${searchTerm ? `?search=${searchTerm}` : ''}`);
+        setCourses(response.data);
+      } catch (error) {
+        console.error('Error fetching the courses:', error);
+      }
+    };
+
+    const delayDebounceFn = setTimeout(() => {
+      fetchCourses();
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
   return (
     <CardGrid>
       {courses.map(course => (
         <Card key={course.id}>
-          <CardImage src={course.image} alt={course.title} />
+        <CardImage src={`http://localhost:8000${course.image}`} alt={course.title} />
           <CardBody>
           <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
           <Tag><RxDashboard fontSize={20}/>{course.tag}</Tag>
@@ -190,5 +129,7 @@ const CourseCards = () => {
     </CardGrid>
   );
 };
-
+CourseCards.propTypes = {
+  searchTerm: PropTypes.string, // Define the expected prop type
+};
 export default CourseCards;

@@ -88,7 +88,7 @@ const Avatar = styled.img`
 
 const Price = styled.div`
   span:first-child {
-    text-decoration: line-through;
+    text-decoration: line-through; 
     color: #888;
     margin-right: 5px;
   }

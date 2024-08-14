@@ -2,6 +2,8 @@ import backgroundImage from '../../assets/searchBg.png'; // Adjust the path as n
 import styled from 'styled-components';
 import { RiArrowDropDownLine } from "react-icons/ri";
 import  CourseCards  from '../CourseCards/CourseCards';
+import { useState } from 'react';
+
 const SearchContainer = styled.div`
   background-image: url(${backgroundImage}); // Replace with your image path
   padding: 60px;
@@ -56,10 +58,16 @@ const styleSearch ={
 }
 
 const Search = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
   return (
     <>
     <SearchContainer>
-    <div style={styleSearch}><SearchInput placeholder="Search your favourite course" />
+    <div style={styleSearch}><SearchInput      value={searchTerm}
+            onChange={handleSearchChange} placeholder="Search your favourite course" />
     <SearchButton>Search</SearchButton></div>
        
       <FilterContainer>
@@ -71,9 +79,10 @@ const Search = () => {
         <FilterButton>Learning Type <RiArrowDropDownLine /></FilterButton>
       </FilterContainer>
     </SearchContainer>
-    <CourseCards/>
+    <CourseCards searchTerm={searchTerm}/>
     </>
   );
 };
+
 
 export default Search;
