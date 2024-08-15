@@ -6,6 +6,7 @@ import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import useAuth from "../../hooks/useAuth";
 import { FaRegEyeSlash, FaRegEye  } from "react-icons/fa";
+import { GoogleLogin } from 'react-google-login';
 const Form = styled.form` 
   display: flex;
   flex-direction: column;
@@ -35,9 +36,9 @@ const Button = styled.button`
   transition: background-color 0.3s;
   font-size: 16px;
 
-  &:hover {
+  ${'' /* &:hover {
     background-color: #53BFBA;
-  }
+  } */}
 `;
 
 const ForgotPassword = styled.a`
@@ -69,6 +70,10 @@ const ShowPasswordIcon = styled.div`
   color: #53BFBA;
   font-size: 1.4rem;
 `;
+const GoogleButton = styled(Button)`
+  background-color: white;
+  color: black;
+`;
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
@@ -94,7 +99,28 @@ export default function LoginForm() {
         setLoading(false); // Hide spinner
       }
     };
-   
+    const handleGoogleSuccess = async (response) => {
+      setLoading(true);
+      try {
+        const result = await axios.post('http://localhost:8000/api/auth/google', {
+          token: response.tokenId,
+        });
+        const token = result.data.token;
+        login(token);
+        toast.success('Successfully logged in with Google!');
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
+      } catch (error) {
+        // toast.error('Google login failed. Please try again.');
+      }
+      setLoading(false);
+    };
+  
+    const handleGoogleFailure = (error) => {
+      console.error('Google login error:', error);
+      // toast.error('Google login failed. Please try again.');
+    };
   return (
     <>
     <Toaster/>
@@ -119,6 +145,17 @@ export default function LoginForm() {
       <ForgotPassword href="#">Forgot Password?</ForgotPassword>
     </Checkbox>
     <Button type="submit">{loading ? <ClipLoader size={20} color={"#fff"} /> : "Login"}  </Button>
+    <GoogleLogin
+          clientId="YOUR_GOOGLE_CLIENT_ID"
+          render={renderProps => (
+            <GoogleButton onClick={renderProps.onClick} disabled={renderProps.disabled}>
+              Login with Google
+            </GoogleButton>
+          )}
+          onSuccess={handleGoogleSuccess}
+          onFailure={handleGoogleFailure}
+          cookiePolicy={'single_host_origin'}
+        />
   </Form>
   </>
   )
