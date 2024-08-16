@@ -122,7 +122,6 @@ const CourseCards = ({ searchTerm }) => {
           <CardFooter>
             <ProfileImage src={user?.profileImage ? `http://localhost:8000/uploads/${user.profileImage}` : noProfile}/>
             <Price>{course.price}</Price>
-           
           </CardFooter>
         </Card>
       ))}

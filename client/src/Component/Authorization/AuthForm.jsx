@@ -93,6 +93,7 @@ const AuthForm = () => {
         </Description>
         {activeTab === 'login' ? <LoginForm /> : <RegisterForm />}
       </FormContainer>
+      
     </Container>
   );
 };
