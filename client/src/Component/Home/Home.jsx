@@ -33,6 +33,17 @@ export default function Home() {
       <Quiz/>
       <ClassManagement/>
       <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
+      <OneOnOneDiscussions/>
       <Blog />
       <BlogList />
       <Footer/>
