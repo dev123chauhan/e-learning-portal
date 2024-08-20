@@ -22,9 +22,10 @@ export default function App() {
         <Route path="/career" element={<Course />} />
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/dashboard" element={<StudentDashboard />} />
-        <Route path="/blog" element={<CourseDetail />} />
+        {/* <Route path="/blog" element={<CourseDetail />} /> */}
         <Route path="/aboutus" element={<Meeting />} />
         <Route path="/my-course" element={<EnrolledCourse />} />
+        <Route path="/course/:id" element={<CourseDetail />} />
       </Routes>
     </>
   );

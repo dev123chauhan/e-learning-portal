@@ -1,6 +1,9 @@
-import courseDetailImage from "../../assets/courseDetailImg.png"
+// import courseDetailImage from "../../assets/courseDetailImg.png"
 import styled from 'styled-components';
 import Rating from "./Rating";
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 const Container = styled.div`
   ${'' /* max-width: 1200px; */}
   margin: 0 auto;
@@ -14,7 +17,7 @@ const ImageSection = styled.div`
 
 const MainImage = styled.img`
   width: 100%;
-  height: 400px;
+  height: 500px;
 `;
 
 const OverlayCard = styled.div`
@@ -119,15 +122,63 @@ const OverviewButton = styled.button`
   color: ${props => props.active ? 'white' : 'black'};
 `;
 
+const Title = styled.h1`
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #333;
+`;
+
+const Description = styled.p`
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #666;
+`;
+
+const BulletPoints = styled.ul`
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  color: #333;
+`;
+
+const BulletPoint = styled.li`
+  font-size: 16px;
+  margin-bottom: 10px;
+`;
+
 function CourseDetail() {
+  const { id } = useParams();
+  const [course, setCourse] = useState(null);
+
+  useEffect(() => {
+    const fetchCourseDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/courses/${id}`);
+        setCourse(response.data);
+      } catch (error) {
+        console.error('Error fetching course details:', error);
+      }
+    };
+
+    fetchCourseDetails();
+  }, [id]);
+
+  if (!course) return <div>Loading...</div>;
   return (
     <Container>
       <ImageSection>
-        <MainImage src={courseDetailImage} alt="Course overview" />
+        <MainImage src={`http://localhost:8000${course.image}`} alt={course.title} />
+    <Title>{course.title}</Title>
+      <Description>{course.description}</Description>
+      <BulletPoints>
+        {course.bullets && course.bullets.map((bullet, index) => (
+          <BulletPoint key={index}>{bullet}</BulletPoint>
+        ))}
+      </BulletPoints>
         <OverlayCard>
-          <SmallImage src={courseDetailImage} alt="Course thumbnail" />
+          <SmallImage src={`http://localhost:8000${course.image}`} alt={course.title} />
           <PriceSection>
-            <CurrentPrice>$49.65</CurrentPrice>
+            <CurrentPrice>${course.price}</CurrentPrice>
             <OriginalPrice>$99.99</OriginalPrice>
             <Discount>50% Off</Discount>
           </PriceSection>

@@ -6,6 +6,8 @@ import { RxDashboard } from "react-icons/rx";
 import axios from "axios"
 import { useEffect, useState } from "react"
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+
 // Styled components for the card
 const CardGrid = styled.div`
   display: grid;
@@ -22,6 +24,7 @@ const Card = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 const CardImage = styled.img`
@@ -83,11 +86,19 @@ const ProfileImage = styled.img`
     box-shadow: 0 0 0 2px #53bfba;
   }
 `;
+function cropText(text, maxLength) {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return text.substring(0, maxLength) + '...';
+}
+
 
 // Main component
 const CourseCards = ({ searchTerm }) => {
   const [courses, setCourses] = useState([]);
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -103,12 +114,18 @@ const CourseCards = ({ searchTerm }) => {
       fetchCourses();
     }, 300);
 
+
     return () => clearTimeout(delayDebounceFn);
   }, [searchTerm]);
+
+  const handleCardClick = (courseId) => {
+    navigate(`/course/${courseId}`);
+  };
+
   return (
     <CardGrid>
       {courses.map(course => (
-        <Card key={course.id}>
+        <Card key={course.id} onClick={() => handleCardClick(course.id)}>
         <CardImage src={`http://localhost:8000${course.image}`} alt={course.title} />
           <CardBody>
           <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
@@ -117,7 +134,7 @@ const CourseCards = ({ searchTerm }) => {
               
             </div>
             <CardTitle>{course.title}</CardTitle>
-            <CardText>{course.text}</CardText>
+            <CardText>{cropText(course.description, 70)}</CardText>
           </CardBody>
           <CardFooter>
             <ProfileImage src={user?.profileImage ? `http://localhost:8000/uploads/${user.profileImage}` : noProfile}/>

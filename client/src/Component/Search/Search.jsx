@@ -1,9 +1,9 @@
 import backgroundImage from '../../assets/searchBg.png'; // Adjust the path as necessary
 import styled from 'styled-components';
-import { RiArrowDropDownLine } from "react-icons/ri";
+// import { RiArrowDropDownLine } from "react-icons/ri";
 import  CourseCards  from '../CourseCards/CourseCards';
 import { useState } from 'react';
-
+import DropdownButton from "../CourseCards/Dropdown"
 const SearchContainer = styled.div`
   background-image: url(${backgroundImage}); // Replace with your image path
   padding: 60px;
@@ -42,15 +42,15 @@ const FilterContainer = styled.div`
   margin-top: 10px;
 `;
 
-const FilterButton = styled.button`
-  padding: 8px 12px;
-  font-size: 14px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 500;
-`;
+// const FilterButton = styled.button`
+//   padding: 8px 12px;
+//   font-size: 14px;
+//   background-color: white;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+//   cursor: pointer;
+//   font-weight: 500;
+// `;
 const styleSearch ={
   display:"flex",
   alignItems:"center",
@@ -70,14 +70,13 @@ const Search = () => {
             onChange={handleSearchChange} placeholder="Search your favourite course" />
     <SearchButton>Search</SearchButton></div>
        
-      <FilterContainer>
-        <FilterButton>Subject <RiArrowDropDownLine /></FilterButton>
-        <FilterButton>Partner <RiArrowDropDownLine /></FilterButton>
-        <FilterButton>Program <RiArrowDropDownLine /></FilterButton>
-        <FilterButton>Language <RiArrowDropDownLine /></FilterButton>
-        <FilterButton>Abaliability <RiArrowDropDownLine /></FilterButton>
-        <FilterButton>Learning Type <RiArrowDropDownLine /></FilterButton>
-      </FilterContainer>
+    <FilterContainer>
+          <DropdownButton label="Subject" options={['Develo..', 'Program..', 'Design']} />
+          <DropdownButton label="Program" options={['Program 1', 'Program 2', 'Program 3']} />
+          <DropdownButton label="Language" options={['English', 'Spanish', 'French']} />
+          <DropdownButton label="Availability" options={['Available', 'Not Available']} />
+          <DropdownButton label="Learning Type" options={['Self-paced', 'Instructor-led']} />
+        </FilterContainer>
     </SearchContainer>
     <CourseCards searchTerm={searchTerm}/>
     </>
