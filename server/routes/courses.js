@@ -1,79 +1,6 @@
 const express = require('express');
 const router = express.Router();
-// const coursesContent = [
-//   {
-//     id: 1, 
-//     image: "/images/Html css and javascript.png",
-//     title: "Html Css & Javascript",
-//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-//     tag: "Design",
-//     duration: "3 Month",
-//     price: "$80"
-//   },
-//   {
-//     id: 2,
-//     image: "/images/python.webp",
-//     title: "Python Fundamentals",
-//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-//     tag: "Design",
-//     duration: "3 Month",
-//     price: "$80"
-//   },
-//   {
-//     id: 3,
-//     image: "/images/c programming.png",
-//     title: "C Programming",
-//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-//     tag: "Design",
-//     duration: "3 Month",
-//     price: "$80"
-//   },
-//   {
-//     id: 4,
-//     image: "/images/c++.jpg",
-//     title: "C++",
-//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-//     tag: "Design",
-//     duration: "3 Month",
-//     price: "$80"
-//   },
-//   {
-//     id: 5,
-//     image: "/images/react.jpg",
-//     title: "React",
-//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-//     tag: "Design",
-//     duration: "3 Month",
-//     price: "$80"
-//   },
-//   {
-//     id: 6,
-//     image: "/images/nodejs.jpg",
-//     title: "NodeJs",
-//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-//     tag: "Design",
-//     duration: "3 Month",
-//     price: "$80"
-//   },
-//   {
-//     id: 7,
-//     image: "/images/mongodb.png",
-//     title: "Mongodb",
-//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-//     tag: "Design",
-//     duration: "3 Month",
-//     price: "$80"
-//   },
-//   {
-//     id: 8,
-//     image: "/images/java.jpg",
-//     title: "Java",
-//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-//     tag: "Design",
-//     duration: "3 Month",
-//     price: "$80"
-//   },
-// ];
+
 
 const coursesContent = [
   {
@@ -205,20 +132,28 @@ const coursesContent = [
     price: "$80"
   },
 ];
+
+
+
 router.get('/courses', (req, res) => {
   const { search } = req.query;
-  
+
   if (search) {
+    const lowerCaseSearch = search.toLowerCase();
+    const regex = new RegExp(lowerCaseSearch, 'i'); // 'i' flag for case-insensitive search
+
     const filteredCourses = coursesContent.filter(course => 
-      course.title.toLowerCase().includes(search.toLowerCase()) ||
-      course.description.toLowerCase().includes(search.toLowerCase()) ||
-      course.tag.toLowerCase().includes(search.toLowerCase())
+      regex.test(course.title) ||
+      regex.test(course.description) ||
+      regex.test(course.tag)
     );
+
     res.json(filteredCourses);
   } else {
     res.json(coursesContent);
   }
 });
+
 
 router.get('/courses/:id', (req, res) => {
   const courseId = parseInt(req.params.id);
@@ -232,3 +167,132 @@ router.get('/courses/:id', (req, res) => {
 });
 
 module.exports = router;
+
+
+// router.get('/courses', (req, res) => {
+//   const { search } = req.query;
+  
+//   if (search) {
+//     const filteredCourses = coursesContent.filter(course => 
+//       course.title.toLowerCase().includes(search.toLowerCase()) ||
+//       course.description.toLowerCase().includes(search.toLowerCase()) ||
+//       course.tag.toLowerCase().includes(search.toLowerCase())
+//     );
+//     res.json(filteredCourses);
+//   } else {
+//     res.json(coursesContent);
+//   }
+// });
+// router.get('/courses', (req, res) => {
+//   const { search } = req.query;
+
+//   if (search) {
+//     const searchTerm = search.trim().toLowerCase();
+//     const searchRegex = new RegExp(searchTerm, 'i');
+
+//     const filteredCourses = coursesContent.filter(course => 
+//       searchRegex.test(course.title) ||
+//       searchRegex.test(course.description) ||
+//       searchRegex.test(course.tag)
+//     );
+
+//     res.json(filteredCourses);
+//   } else {
+//     res.json(coursesContent);
+//   }
+// });
+
+
+// router.get('/courses', (req, res) => {
+//   const { search } = req.query;
+
+//   if (search) {
+//     const lowerCaseSearch = search.toLowerCase();
+
+//     const filteredCourses = coursesContent.filter(course => 
+//       course.title.toLowerCase().includes(lowerCaseSearch) ||
+//       course.description.toLowerCase().includes(lowerCaseSearch) ||
+//       course.tag.toLowerCase().includes(lowerCaseSearch)
+//     );
+
+//     res.json(filteredCourses);
+//   } else {
+//     res.json(coursesContent);
+//   }
+// });
+
+
+// const coursesContent = [
+//   {
+//     id: 1, 
+//     image: "/images/Html css and javascript.png",
+//     title: "Html Css & Javascript",
+//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//     tag: "Design",
+//     duration: "3 Month",
+//     price: "$80"
+//   },
+//   {
+//     id: 2,
+//     image: "/images/python.webp",
+//     title: "Python Fundamentals",
+//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//     tag: "Design",
+//     duration: "3 Month",
+//     price: "$80"
+//   },
+//   {
+//     id: 3,
+//     image: "/images/c programming.png",
+//     title: "C Programming",
+//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//     tag: "Design",
+//     duration: "3 Month",
+//     price: "$80"
+//   },
+//   {
+//     id: 4,
+//     image: "/images/c++.jpg",
+//     title: "C++",
+//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//     tag: "Design",
+//     duration: "3 Month",
+//     price: "$80"
+//   },
+//   {
+//     id: 5,
+//     image: "/images/react.jpg",
+//     title: "React",
+//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//     tag: "Design",
+//     duration: "3 Month",
+//     price: "$80"
+//   },
+//   {
+//     id: 6,
+//     image: "/images/nodejs.jpg",
+//     title: "NodeJs",
+//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//     tag: "Design",
+//     duration: "3 Month",
+//     price: "$80"
+//   },
+//   {
+//     id: 7,
+//     image: "/images/mongodb.png",
+//     title: "Mongodb",
+//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//     tag: "Design",
+//     duration: "3 Month",
+//     price: "$80"
+//   },
+//   {
+//     id: 8,
+//     image: "/images/java.jpg",
+//     title: "Java",
+//     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//     tag: "Design",
+//     duration: "3 Month",
+//     price: "$80"
+//   },
+// ];

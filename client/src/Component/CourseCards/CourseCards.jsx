@@ -100,23 +100,25 @@ const CourseCards = ({ searchTerm }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/courses${searchTerm ? `?search=${searchTerm}` : ''}`);
-        setCourses(response.data);
+        const response = await axios.get(`http://localhost:8000/api/courses`);
+        const filteredCourses = searchTerm
+          ? response.data.filter((course) =>
+              course.title.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          : response.data;
+        setCourses(filteredCourses);
       } catch (error) {
         console.error('Error fetching the courses:', error);
       }
     };
-
-    const delayDebounceFn = setTimeout(() => {
-      fetchCourses();
-    }, 300);
-
-
-    return () => clearTimeout(delayDebounceFn);
+  
+    fetchCourses();
   }, [searchTerm]);
+
 
   const handleCardClick = (courseId) => {
     navigate(`/course/${courseId}`);
@@ -134,7 +136,7 @@ const CourseCards = ({ searchTerm }) => {
               
             </div>
             <CardTitle>{course.title}</CardTitle>
-            <CardText>{cropText(course.description, 70)}</CardText>
+            <CardText>{cropText(course.description, 65)}</CardText>
           </CardBody>
           <CardFooter>
             <ProfileImage src={user?.profileImage ? `http://localhost:8000/uploads/${user.profileImage}` : noProfile}/>
@@ -149,3 +151,23 @@ CourseCards.propTypes = {
   searchTerm: PropTypes.string, // Define the expected prop type
 };
 export default CourseCards;
+
+
+
+  // useEffect(() => {
+  //   const fetchCourses = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:8000/api/courses${searchTerm ? `?search=${searchTerm}` : ''}`);
+  //       setCourses(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching the courses:', error);
+  //     }
+  //   };
+
+  //   const delayDebounceFn = setTimeout(() => {
+  //     fetchCourses();
+  //   }, 300);
+
+
+  //   return () => clearTimeout(delayDebounceFn);
+  // }, [searchTerm]);

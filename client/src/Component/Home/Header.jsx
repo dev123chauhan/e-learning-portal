@@ -15,7 +15,7 @@ const HeaderContainer = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 2000;
   transition: all 0.3s ease;
   ${'' /* background-color: ${({ scrolled }) => (scrolled ? 'white' : 'transparent')};
   color: ${({ scrolled }) => (scrolled ? 'black' : 'white')};
