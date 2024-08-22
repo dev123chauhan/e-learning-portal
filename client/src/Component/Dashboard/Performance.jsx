@@ -48,7 +48,7 @@ const GaugeArc = styled.div`
   height: 100px;
   border-top-left-radius: 100px;
   border-top-right-radius: 100px;
-  border: 20px solid #f0f0f0;
+  border: 10px solid #f0f0f0;
   border-bottom: 0;
   box-sizing: border-box;
 `;
@@ -61,10 +61,11 @@ const GaugeFill = styled.div`
   height: 100px;
   border-top-left-radius: 100px;
   border-top-right-radius: 100px;
-  border: 20px solid #20c997;
+  border: 10px solid #20c997;
   border-bottom: 0;
   box-sizing: border-box;
-  clip-path: polygon(50% 50%, 0% 0%, 100% 0%);
+  ${'' /* clip-path: polygon(50% 50%, 0% 0%, 100% 0%); */}
+  clip-path: polygon(0% 105%, 0% 0%, 84% 0%);
 `;
 
 const GaugeNeedle = styled.div`

@@ -139,7 +139,7 @@ const CourseCards = ({ searchTerm }) => {
             <CardText>{cropText(course.description, 65)}</CardText>
           </CardBody>
           <CardFooter>
-            <ProfileImage src={user?.profileImage ? `http://localhost:8000/uploads/${user.profileImage}` : noProfile}/>
+            <ProfileImage src={user?.profileImage ? `http://localhost:8000/uploads/${user.profileImage}` : noProfile}/> {user?.username}
             <Price>{course.price}</Price>
           </CardFooter>
         </Card>

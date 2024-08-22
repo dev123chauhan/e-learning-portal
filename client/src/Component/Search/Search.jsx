@@ -4,16 +4,16 @@ import styled from 'styled-components';
 import  CourseCards  from '../CourseCards/CourseCards';
 import { useState } from 'react';
 import DropdownButton from "../CourseCards/Dropdown"
-import Navigation from '../Navigation/Navigation';
 
 const SearchContainer = styled.div`
   background-image: url(${backgroundImage}); // Replace with your image path
-  padding: 60px;
+  padding: 80px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px 0 0 4px;
   background-size: cover; 
   background-position: center;
+  margin-top: 3rem;
 `;
 
 const SearchInput = styled.input`
@@ -67,7 +67,6 @@ const Search = () => {
   };
   return (
     <>
-    <Navigation/>
     <SearchContainer>
     <div style={styleSearch}><SearchInput      value={searchTerm}
             onChange={handleSearchChange} placeholder="Search your favourite course" />

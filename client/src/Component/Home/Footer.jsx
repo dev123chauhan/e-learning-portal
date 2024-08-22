@@ -1,6 +1,5 @@
-
 import styled from 'styled-components';
-
+import {Link} from "react-router-dom"
 const FooterContainer = styled.footer`
   background-color: #1e1e2f;
   color: #ffffff;
@@ -103,9 +102,10 @@ const Footer = () => {
       </SubscribeForm>
       
       <Links>
-        <a href="#">Careers</a>|
-        <a href="#">Privacy Policy</a>|
-        <a href="#">Terms & Conditions</a>
+        <Link to="">Careers</Link>
+        <Link to="">Privacy Policy</Link>
+        <Link to="">Careers</Link>
+        <Link to="">Terms & Conditions</Link>
       </Links>
       
       <Copyright>© 2021 Class Technologies Inc.</Copyright>

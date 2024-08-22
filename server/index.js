@@ -7,6 +7,7 @@ const path = require('path');
 const userRoutes = require("./routes/users");
 const coursesRoute = require("./routes/courses");
 const googleRoute = require("./routes/google")
+const enrollmentRoutes = require('./routes/enrollment');
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
@@ -30,6 +31,7 @@ app.use('/images', express.static(path.join(__dirname, 'public/images')));
 app.use("/api", userRoutes);
 app.use("/api", coursesRoute);
 app.use("/api", googleRoute);
+app.use('/api', enrollmentRoutes);
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });

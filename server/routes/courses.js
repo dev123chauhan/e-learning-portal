@@ -131,6 +131,70 @@ const coursesContent = [
     duration: "3 Months",
     price: "$80"
   },
+  {
+    id: 9,
+    image: "/images/data science.png",
+    title: "Data Science Fundamentals",
+    description: "Dive into the world of data science and learn how to extract insights from complex datasets. This course covers statistical analysis, machine learning, and data visualization techniques.",
+    bullets: [
+      "Introduction to statistical analysis and probability",
+      "Data cleaning and preprocessing techniques",
+      "Machine learning algorithms and their applications",
+      "Data visualization with Python libraries",
+      "Big data processing with Apache Spark"
+    ],
+    tag: "Data Science",
+    duration: "4 Months",
+    price: "$100"
+  },
+  {
+    id: 10,
+    image: "/images/aws.png",
+    title: "AWS Cloud Computing",
+    description: "Master cloud computing with Amazon Web Services (AWS). Learn how to design, deploy, and manage scalable, highly available, and fault-tolerant systems on the AWS platform.",
+    bullets: [
+      "Introduction to cloud computing concepts",
+      "AWS core services: EC2, S3, RDS, and more",
+      "Designing for high availability and fault tolerance",
+      "Implementing security best practices in AWS",
+      "Serverless computing with AWS Lambda"
+    ],
+    tag: "Cloud Computing",
+    duration: "3 Months",
+    price: "$90"
+  },
+  {
+    id: 11,
+    image: "/images/cyber security.jpeg",
+    title: "Cybersecurity Essentials",
+    description: "Develop a strong foundation in cybersecurity principles and practices. Learn how to protect systems, networks, and programs from digital attacks.",
+    bullets: [
+      "Understanding common cyber threats and vulnerabilities",
+      "Network security and encryption techniques",
+      "Ethical hacking and penetration testing",
+      "Security policies and risk management",
+      "Incident response and forensics"
+    ],
+    tag: "Security",
+    duration: "3 Months",
+    price: "$85"
+  },
+  {
+    id: 12,
+    image: "/images/mobile app.jpg",
+    title: "Mobile App Development",
+    description: "Learn to build native mobile applications for iOS and Android platforms. This course covers both Swift for iOS and Kotlin for Android development.",
+    bullets: [
+      "Introduction to mobile app architecture",
+      "UI design principles for mobile apps",
+      "Working with device features and APIs",
+      "Data persistence and networking in mobile apps",
+      "Publishing apps to app stores"
+    ],
+    tag: "Mobile Development",
+    duration: "4 Months",
+    price: "$95"
+  }
 ];
 
 

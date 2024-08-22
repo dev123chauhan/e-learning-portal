@@ -4,6 +4,7 @@ import Rating from "./Rating";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Modal from './Modal';
 const Container = styled.div`
   ${'' /* max-width: 1200px; */}
   margin: 0 auto;
@@ -149,6 +150,7 @@ const BulletPoint = styled.li`
 function CourseDetail() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchCourseDetails = async () => {
@@ -164,6 +166,15 @@ function CourseDetail() {
   }, [id]);
 
   if (!course) return <div>Loading...</div>;
+
+
+  const handleBuyNowClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <Container>
       <ImageSection>
@@ -178,12 +189,13 @@ function CourseDetail() {
         <OverlayCard>
           <SmallImage src={`http://localhost:8000${course.image}`} alt={course.title} />
           <PriceSection>
-            <CurrentPrice>${course.price}</CurrentPrice>
+            <CurrentPrice>{course.price}</CurrentPrice>
             <OriginalPrice>$99.99</OriginalPrice>
             <Discount>50% Off</Discount>
           </PriceSection>
           <TimeLeft>11 hour left at this price</TimeLeft>
-          <BuyNowButton>Buy Now</BuyNowButton>
+          <BuyNowButton onClick={handleBuyNowClick}>Enroll Now</BuyNowButton>
+          <Modal isOpen={isModalOpen} onClose={handleCloseModal}/>
           <h3>This Course included</h3>
           <CourseIncludes>
             <CourseItem>Money Back Guarantee</CourseItem>

@@ -48,7 +48,7 @@ const Category = () => {
     <Grid>
       {categories.map((category, index) => (
         <Card key={index}>
-       <img src={category.image} style={{ backgroundColor: category.color, padding:"20px",borderRadius: "8px", width:"20px" }}/>
+       <img src={category.image} style={{ backgroundColor: category.color, padding:"10px",borderRadius: "8px", width:"40px" }}/>
           <Title>{category.name}</Title>
           <Description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, 

@@ -9,6 +9,8 @@ import Meeting from "./Component/Meeting/Meeting";
 import EnrolledCourse from "./Component/EnrolledCourse/EnrolledCourse";
 // import Dashboard from "./Component/Dashboard/Dashboard";
 import StudentDashboard from "./Component/Dashboard/StudentDashboard";
+import Layout from "./Component/Layout/Layout";
+import Blog from "./Component/Blog/Blog";
 
 
 export default function App() {
@@ -16,16 +18,16 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/courses" element={<Search />} />
+        <Route path="/courses" element={<Layout><Search /></Layout>} />
         <Route path="/auth" element={<AuthForm />} />
         <Route path="/profile" element={<ProfileDashboard />} />
-        <Route path="/career" element={<Course />} />
+        <Route path="/career" element={<Layout><Course /></Layout>} />
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/dashboard" element={<StudentDashboard />} />
-        {/* <Route path="/blog" element={<CourseDetail />} /> */}
-        <Route path="/aboutus" element={<Meeting />} />
+        <Route path="/blog" element={<Layout><Blog /></Layout>} />
+        <Route path="/about" element={<Layout><Meeting /></Layout>} />
         <Route path="/my-course" element={<EnrolledCourse />} />
-        <Route path="/course/:id" element={<CourseDetail />} />
+        <Route path="/course/:id" element={<Layout><CourseDetail /></Layout>} />
       </Routes>
     </>
   );

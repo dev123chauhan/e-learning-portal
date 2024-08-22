@@ -1,14 +1,23 @@
-import styled from 'styled-components';
-import { FiGrid, FiFileText, FiClock, FiFolder, FiInbox, FiSettings, FiBell } from 'react-icons/fi';
-import { useState } from 'react';
-import avatarImage from "../../assets/person4.png"
-import StatisticsSection from './StatisticsSection';
-import Performance from './Performance';
+import styled from "styled-components";
+import useAuth from "../../hooks/useAuth";
+import noProfile from "../../assets/noProfile.jpg";
+import {
+  FiGrid,
+  FiFileText,
+  FiClock,
+  FiFolder,
+  FiInbox,
+  FiSettings,
+  FiBell,
+} from "react-icons/fi";
+import { useState } from "react";
+import StatisticsSection from "./StatisticsSection";
+import Performance from "./Performance";
 // import Performance from './Performace';
 
 const AppContainer = styled.div`
   display: flex;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f7fa;
   height: 100vh;
 `;
@@ -17,7 +26,7 @@ const Sidebar = styled.div`
   width: 250px;
   background-color: white;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 `;
 
 const Logo = styled.div`
@@ -36,9 +45,11 @@ const SidebarItem = styled.div`
   cursor: pointer;
   border-radius: 5px;
   &:hover {
-    ${'' /* background-color: #f0f0f0; */}
+    ${"" /* background-color: #f0f0f0; */}
   }
-  ${props => props.active && `
+  ${(props) =>
+    props.active &&
+    `
     background-color: #49BBBD;
     color: white;
   `}
@@ -84,11 +95,11 @@ const CourseCards = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
   padding: 20px;
   border-radius: 10px;
   width: 200px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 `;
 
 const StatsContainer = styled.div`
@@ -109,14 +120,14 @@ const LeaderBoard = styled.div`
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 `;
 
 const ProfileSidebar = styled.div`
   width: 300px;
   padding: 20px;
   background-color: white;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
 `;
 
 const ProfilePic = styled.img`
@@ -125,7 +136,13 @@ const ProfilePic = styled.img`
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 10px;
+
 `;
+const stylePic ={
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center"
+}
 
 const TodoList = styled.div`
   margin-top: 20px;
@@ -139,42 +156,66 @@ const TodoItem = styled.div`
     margin-right: 10px;
   }
 `;
-
+function cropText(text, maxLength) {
+  if (text?.length <= maxLength) {
+    return text;
+  }
+  return text?.substring(0, maxLength) + '';
+}
 function StudentDashboard() {
-    const [activeTab, setActiveTab] = useState('Overview');
-    // const performanceValue = 8966;
-    // const timeOptions = [
-    //   { value: 'monthly', label: 'Monthly' },
-    //   { value: 'weekly', label: 'Weekly' },
-    //   { value: 'daily', label: 'Daily' },
-    // ];
+  const [activeTab, setActiveTab] = useState("Overview");
+  const { user } = useAuth();
+  // const performanceValue = 8966;
+  // const timeOptions = [
+  //   { value: 'monthly', label: 'Monthly' },
+  //   { value: 'weekly', label: 'Weekly' },
+  //   { value: 'daily', label: 'Daily' },
+  // ];
   return (
     <AppContainer>
-     <Sidebar>
-      <Logo>Learninja</Logo>
-      <SidebarItem active={activeTab === 'Overview'} onClick={() => setActiveTab('Overview')}>
-        <FiGrid /> Overview
-      </SidebarItem>
-      <SidebarItem active={activeTab === 'Assignment'} onClick={() => setActiveTab('Assignment')}>
-        <FiFileText /> Assignment
-      </SidebarItem>
-      <SidebarItem active={activeTab === 'Reports'} onClick={() => setActiveTab('Reports')}>
-        <FiClock /> Reports
-      </SidebarItem>
-      <SidebarItem active={activeTab === 'File Storage'} onClick={() => setActiveTab('File Storage')}>
-        <FiFolder /> File Storage
-      </SidebarItem>
-      <SidebarItem active={activeTab === 'Inbox'} onClick={() => setActiveTab('Inbox')}>
-        <FiInbox /> Inbox
-      </SidebarItem>
-      <SidebarItem active={activeTab === 'Settings'} onClick={() => setActiveTab('Settings')}>
-        <FiSettings /> Settings
-      </SidebarItem>
-    </Sidebar>
+      <Sidebar>
+        <Logo>E-learning</Logo>
+        <SidebarItem
+          active={activeTab === "Overview"}
+          onClick={() => setActiveTab("Overview")}
+        >
+          <FiGrid /> Overview
+        </SidebarItem>
+        <SidebarItem
+          active={activeTab === "Assignment"}
+          onClick={() => setActiveTab("Assignment")}
+        >
+          <FiFileText /> Assignment
+        </SidebarItem>
+        <SidebarItem
+          active={activeTab === "Reports"}
+          onClick={() => setActiveTab("Reports")}
+        >
+          <FiClock /> Reports
+        </SidebarItem>
+        <SidebarItem
+          active={activeTab === "File Storage"}
+          onClick={() => setActiveTab("File Storage")}
+        >
+          <FiFolder /> File Storage
+        </SidebarItem>
+        <SidebarItem
+          active={activeTab === "Inbox"}
+          onClick={() => setActiveTab("Inbox")}
+        >
+          <FiInbox /> Inbox
+        </SidebarItem>
+        <SidebarItem
+          active={activeTab === "Settings"}
+          onClick={() => setActiveTab("Settings")}
+        >
+          <FiSettings /> Settings
+        </SidebarItem>
+      </Sidebar>
       <MainContent>
         <Header>
           <div>
-            <h1>Hello Maietry 👋</h1>
+            <h1>Hello {cropText(user?.username, 6)} 👋</h1>
             <p>Lets learn something new today!</p>
           </div>
           <SearchBar>
@@ -192,13 +233,13 @@ function StudentDashboard() {
         </CourseCards>
         <StatsContainer>
           {/* <Chart> */}
-          
-            <StatisticsSection/>
+
+          <StatisticsSection />
           {/* </Chart> */}
           {/* <Chart> */}
-            
-            {/* <Performance performanceValue={performanceValue} timeOptions={timeOptions} /> */}
-            <Performance />
+
+          {/* <Performance performanceValue={performanceValue} timeOptions={timeOptions} /> */}
+          <Performance />
           {/* </Chart> */}
         </StatsContainer>
         <LeaderBoard>
@@ -207,9 +248,19 @@ function StudentDashboard() {
         </LeaderBoard>
       </MainContent>
       <ProfileSidebar>
-        <ProfilePic src={avatarImage} alt="Maietry Prajapati" />
-        <h2>Maietry Prajapati</h2>
-        <p>College Student</p>
+      <div style={stylePic}>
+        <ProfilePic  src={
+            user?.profileImage
+              ? `http://localhost:8000/uploads/${user.profileImage}`
+              : noProfile
+          } alt="Maietry Prajapati" />
+            </div>
+            <div style={stylePic}>
+        <h2>{user?.username}</h2>
+        </div>
+        <div style={stylePic}>
+        <p>{user?.email}</p>
+        </div>
         {/* Add calendar component here */}
         <TodoList>
           <h3>To Do List</h3>

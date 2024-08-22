@@ -1,111 +1,336 @@
-import { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-const Wrapper = styled.nav`
+import { useRef, useState } from "react";
+import styled from "styled-components";
+import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
+import { SlBookOpen } from "react-icons/sl";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { FaUser, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
+import noProfile from "../../assets/noProfile.jpg";
+const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  background-color: white;
-  color: black;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem 0.5rem;
-  }
+  padding: 1rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 `;
 
 const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
-
-  @media (max-width: 768px) {
-    margin-bottom: 1rem;
-  }
 `;
 
-const Menu = styled.ul`
+const NavLinks = styled.div`
   display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  gap: 1rem;
+  align-items: center;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
-    height: 100%;
-    background-color: white;
-    z-index: 2;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    transition: left 0.3s ease-in-out;
+    display: none;
   }
 `;
 
-const MenuItem = styled.li`
-  margin-right: 1.5rem;
-
-  @media (max-width: 768px) {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
-    padding: 1rem;
-  }
-
-  a {
-    color: black;
-    text-decoration: none;
-
-    &:hover {
-      color: black;
-    }
-  }
+const NavLink = styled.a`
+  text-decoration: none;
+  color: #333;
 `;
 
-const HamburgerMenu = styled.button`
+const MenuIcon = styled.div`
   display: none;
-  border: none;
-  color: black;
-  font-size: 1.5rem;
   cursor: pointer;
+  font-size: 1.5rem;
 
   @media (max-width: 768px) {
     display: block;
   }
 `;
 
+const Sidebar = styled.div`
+  position: fixed;
+  top: 0;
+  left: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
+  width: 250px;
+  height: 100vh;
+  background-color: #fff;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+`;
+
+const SidebarContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1rem;
+`;
+
+const CloseIcon = styled.div`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+`;
+
+const ProfileContainer = styled.div`
+  position: relative;
+`;
+
+const ProfileImage = styled.img`
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 0 0 2px #53bfba;
+  }
+`;
+
+const Dropdown = styled.div`
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+  visibility: ${({ $isOpen }) => ($isOpen ? "visible" : "hidden")};
+  transform: ${({ $isOpen }) =>
+    $isOpen ? "translateY(0)" : "translateY(-10px)"};
+  transition: all 0.3s ease;
+  z-index: 1000;
+  min-width: 200px;
+`;
+
+const DropdownItem = styled(Link)`
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #d4fff1;
+  }
+
+  svg {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #53bfba;
+  }
+`;
+
+const Divider = styled.hr`
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 8px 0;
+`;
+
+const UserInfo = styled.div`
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+`;
+
+const UserName = styled.h4`
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+`;
+
+const UserEmail = styled.p`
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #666;
+`;
+
+const ButtonGroup = styled.div`
+  button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const LoginButton = styled.button`
+  background-color: #53bfba;
+  color: white;
+`;
+
+const SignUpButton = styled.button`
+  background-color: #53bfba;
+  color: white;
+  border: 1px solid #53bfba !important;
+`;
+
 const Navigation = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { user, logout } = useAuth(); // Simulating login state
+  const dropdownRef = useRef(null);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
-
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
   return (
-    <Wrapper>
-      <Logo>My App</Logo>
-      <Menu isOpen={isMenuOpen}>
-        <MenuItem>
-          <Link to="">Home</Link>
-        </MenuItem>
-        <MenuItem>
-          <Link to="">About</Link>
-        </MenuItem>
-        <MenuItem>
-          <Link to="">Services</Link>
-        </MenuItem>
-        <MenuItem>
-          <Link to="">Contact</Link>
-        </MenuItem>
-      </Menu>
-      <HamburgerMenu onClick={toggleMenu}>
-        {isMenuOpen ? <FaTimes /> : <FaBars />}
-      </HamburgerMenu>
-    </Wrapper>
+    <Nav>
+      <Logo>E-learning</Logo>
+      <NavLinks>
+        <NavLink>
+          <Link to="/">Home</Link>
+        </NavLink>
+        <NavLink>
+          <Link to="/courses">Courses</Link>
+        </NavLink>
+        <NavLink>
+          <Link to="/career">Careers</Link>
+        </NavLink>
+        <NavLink>
+          <Link to="/blog">Blog</Link>
+        </NavLink>
+        <NavLink>
+          <Link to="/about">About Us</Link>
+        </NavLink>
+      </NavLinks>
+      {user ? (
+        <ProfileContainer ref={dropdownRef}>
+          <ProfileImage
+            onClick={toggleDropdown}
+            alt={user.name}
+            src={
+              user?.profileImage
+                ? `http://localhost:8000/uploads/${user.profileImage}`
+                : noProfile
+            }
+          />
+          {/* <Dropdown isOpen={isDropdownOpen}> */}
+          <Dropdown $isOpen={isDropdownOpen}>
+            <UserInfo>
+              <UserName>{user.name}</UserName>
+              <UserEmail>{user.email}</UserEmail>
+            </UserInfo>
+            <DropdownItem to="/profile">
+              <FaUser />
+              My Profile
+            </DropdownItem>
+            <DropdownItem to="/dashboard">
+              <LuLayoutDashboard />
+              Dashboard
+            </DropdownItem>
+            <DropdownItem to="/my-course">
+              <SlBookOpen />
+              My course
+            </DropdownItem>
+            <Divider />
+            <Link to="/auth">
+              <DropdownItem onClick={logout}>
+                <FaSignOutAlt />
+                Logout
+              </DropdownItem>
+            </Link>
+          </Dropdown>
+        </ProfileContainer>
+      ) : (
+        <ButtonGroup>
+          <Link to="/auth">
+            <LoginButton>Login</LoginButton>
+          </Link>
+          <Link to="/auth">
+            <SignUpButton>Sign Up </SignUpButton>
+          </Link>
+        </ButtonGroup>
+      )}
+      <MenuIcon onClick={toggleSidebar}>
+        {" "}
+        <FaBars />
+      </MenuIcon>
+      <Sidebar isOpen={isSidebarOpen}>
+        <SidebarContent>
+          <CloseIcon onClick={toggleSidebar}>
+            {" "}
+            <FaTimes />
+          </CloseIcon>
+          <NavLink>
+            <Link to="/">Home</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/courses">Courses</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/career">Careers</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/blog">Blog</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/about">About Us</Link>
+          </NavLink>
+          {user ? (
+            <ProfileContainer ref={dropdownRef}>
+              <ProfileImage
+                onClick={toggleDropdown}
+                alt={user.name}
+                src={
+                  user?.profileImage
+                    ? `http://localhost:8000/uploads/${user.profileImage}`
+                    : noProfile
+                }
+              />
+              {/* <Dropdown isOpen={isDropdownOpen}> */}
+              <Dropdown $isOpen={isDropdownOpen}>
+                <UserInfo>
+                  <UserName>{user.name}</UserName>
+                  <UserEmail>{user.email}</UserEmail>
+                </UserInfo>
+                <DropdownItem to="/profile">
+                  <FaUser />
+                  My Profile
+                </DropdownItem>
+                <DropdownItem to="/dashboard">
+                  <LuLayoutDashboard />
+                  Dashboard
+                </DropdownItem>
+                <DropdownItem to="/my-course">
+                  <SlBookOpen />
+                  My course
+                </DropdownItem>
+                <Divider />
+                <DropdownItem onClick={logout}>
+                  <FaSignOutAlt />
+                  Logout
+                </DropdownItem>
+              </Dropdown>
+            </ProfileContainer>
+          ) : (
+            <ButtonGroup>
+              <LoginButton>
+                <Link to="/auth">Login</Link>
+              </LoginButton>
+              <SignUpButton>
+                <Link to="/auth">Sign Up</Link>
+              </SignUpButton>
+            </ButtonGroup>
+          )}
+        </SidebarContent>
+      </Sidebar>
+    </Nav>
   );
 };
 

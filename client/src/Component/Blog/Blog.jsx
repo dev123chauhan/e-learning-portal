@@ -1,8 +1,10 @@
 import card1 from '../../assets/card1.png';
 import styled from 'styled-components';
+import BlogList from './BlogList';
 const Container = styled.div`
   background-color: #f0f8ff;
   padding: 2rem;
+  margin-top: 4rem;
 `;
 
 const Content = styled.div`
@@ -58,6 +60,7 @@ const ImageSection = styled.div`
   }
 `;
 const Blog = () => (
+  <> 
   <Container>
     <Content>
       <TextSection>
@@ -75,6 +78,8 @@ const Blog = () => (
       </ImageSection>
     </Content>
   </Container>
+  <BlogList />
+  </>
 );
 
 export default Blog;

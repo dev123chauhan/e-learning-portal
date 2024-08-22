@@ -17,9 +17,6 @@ const HeaderContainer = styled.header`
   right: 0;
   z-index: 2000;
   transition: all 0.3s ease;
-  ${'' /* background-color: ${({ scrolled }) => (scrolled ? 'white' : 'transparent')};
-  color: ${({ scrolled }) => (scrolled ? 'black' : 'white')};
-  box-shadow: ${({ scrolled }) => (scrolled ? '0 2px 10px rgba(0,0,0,0.1)' : 'none')}; */}
   background-color: ${({ $scrolled }) => ($scrolled ? 'white' : 'transparent')};
   color: ${({ $scrolled }) => ($scrolled ? 'black' : 'white')};
   box-shadow: ${({ $scrolled }) => ($scrolled ? '0 2px 10px rgba(0,0,0,0.1)' : 'none')};
@@ -73,10 +70,7 @@ const LoginButton = styled.button`
   color: ${({ scrolled }) => (scrolled ? 'white' : '#53bfba')};
 `;
 
-// const LoginButton = styled.button`
-//   background-color: ${({ $scrolled }) => ($scrolled ? '#53bfba' : 'white')};
-//   color: ${({ $scrolled }) => ($scrolled ? 'white' : '#53bfba')};
-// `;
+
 
 const SignUpButton = styled.button`
   background-color: #53bfba;
@@ -108,9 +102,7 @@ const Dropdown = styled.div`
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  ${'' /* opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  transform: ${({ isOpen }) => (isOpen ? "translateY(0)" : "translateY(-10px)")}; */}
+
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
   visibility: ${({ $isOpen }) => ($isOpen ? "visible" : "hidden")};
   transform: ${({ $isOpen }) => ($isOpen ? "translateY(0)" : "translateY(-10px)")};
@@ -177,7 +169,7 @@ const HamburgerButton = styled.button`
 const Sidebar = styled.div`
   position: fixed;
   top: 0;
-  ${'' /* left: ${({ isOpen }) => (isOpen ? '0' : '-381px')}; */}
+
   left: ${({ $isOpen }) => ($isOpen ? '0' : '-381px')};
   width: 300px;
   height: 100vh;
@@ -259,14 +251,14 @@ function Header() {
   return (
     <>
       <HeaderContainer $scrolled={scrolled}>
-        <Logo>TOTC</Logo>
+        <Logo>E-learning</Logo>
         <Nav>
           <ul>
             <Link to="/"><li>Home</li></Link>
             <Link to="/courses"><li>Courses</li></Link>
-            <Link to="career"><li>Careers</li></Link>
-            <Link to="blog"><li>Blog</li></Link>
-            <Link to="/aboutus"><li>About Us</li></Link>
+            <Link to="/career"><li>Careers</li></Link>
+            <Link to="/blog"><li>Blog</li></Link>
+            <Link to="/about"><li>About Us</li></Link>
           </ul>
         </Nav>
         <ButtonGroup>
@@ -318,7 +310,7 @@ function Header() {
         </HamburgerButton>
       </HeaderContainer>
 
-      {/* <Sidebar isOpen={isSidebarOpen}> */}
+
       <Sidebar $isOpen={isSidebarOpen}>
         <SidebarCloseButton onClick={toggleSidebar}>
           <FaTimes />
@@ -329,7 +321,7 @@ function Header() {
             <li><Link to="/courses" onClick={toggleSidebar}>Courses</Link></li>
             <li><Link to="/career" onClick={toggleSidebar}>Careers</Link></li>
             <li><Link to="/blog" onClick={toggleSidebar}>Blog</Link></li>
-            <li><Link to="/aboutus" onClick={toggleSidebar}>About Us</Link></li>
+            <li><Link to="/about" onClick={toggleSidebar}>About Us</Link></li>
           </ul>
         </SidebarNav>
         
@@ -351,7 +343,6 @@ function Header() {
         ) : (
           <>
             <Link to="/auth" onClick={toggleSidebar}>
-            {/* <LoginButton $scrolled={scrolled}>Login</LoginButton> */}
             <LoginButton>Login</LoginButton>
             </Link>
             <Link to="/auth" onClick={toggleSidebar}>
