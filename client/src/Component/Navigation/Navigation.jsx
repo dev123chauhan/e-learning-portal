@@ -1,8 +1,7 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
-import { SlBookOpen } from "react-icons/sl";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaUser, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
 import noProfile from "../../assets/noProfile.jpg";
@@ -143,7 +142,7 @@ const UserInfo = styled.div`
 
 const UserName = styled.h4`
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
 `;
 
@@ -183,12 +182,27 @@ const Navigation = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user, logout } = useAuth(); // Simulating login state
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+  
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
   return (
     <Nav>
       <Logo>E-learning</Logo>
@@ -206,7 +220,7 @@ const Navigation = () => {
           <Link to="/blog">Blog</Link>
         </NavLink>
         <NavLink>
-          <Link to="/about">About Us</Link>
+          <Link to="/meeting">Meeting</Link>
         </NavLink>
       </NavLinks>
       {user ? (
@@ -223,7 +237,7 @@ const Navigation = () => {
           {/* <Dropdown isOpen={isDropdownOpen}> */}
           <Dropdown $isOpen={isDropdownOpen}>
             <UserInfo>
-              <UserName>{user.name}</UserName>
+              <UserName>{user.username}</UserName>
               <UserEmail>{user.email}</UserEmail>
             </UserInfo>
             <DropdownItem to="/profile">
@@ -233,10 +247,6 @@ const Navigation = () => {
             <DropdownItem to="/dashboard">
               <LuLayoutDashboard />
               Dashboard
-            </DropdownItem>
-            <DropdownItem to="/my-course">
-              <SlBookOpen />
-              My course
             </DropdownItem>
             <Divider />
             <Link to="/auth">
@@ -280,7 +290,7 @@ const Navigation = () => {
             <Link to="/blog">Blog</Link>
           </NavLink>
           <NavLink>
-            <Link to="/about">About Us</Link>
+            <Link to="/meeting">Meeting</Link>
           </NavLink>
           {user ? (
             <ProfileContainer ref={dropdownRef}>
@@ -306,10 +316,6 @@ const Navigation = () => {
                 <DropdownItem to="/dashboard">
                   <LuLayoutDashboard />
                   Dashboard
-                </DropdownItem>
-                <DropdownItem to="/my-course">
-                  <SlBookOpen />
-                  My course
                 </DropdownItem>
                 <Divider />
                 <DropdownItem onClick={logout}>

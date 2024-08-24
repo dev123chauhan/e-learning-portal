@@ -4,7 +4,6 @@ import styled from "styled-components";
 import useAuth from "../../hooks/useAuth";
 import noProfile from "../../assets/noProfile.jpg";
 import { FaUser, FaCog, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
-import { SlBookOpen } from "react-icons/sl";
 import { LuLayoutDashboard } from "react-icons/lu";
 const HeaderContainer = styled.header`
   display: flex;
@@ -143,7 +142,7 @@ const UserInfo = styled.div`
 
 const UserName = styled.h4`
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
 `;
 
@@ -258,7 +257,7 @@ function Header() {
             <Link to="/courses"><li>Courses</li></Link>
             <Link to="/career"><li>Careers</li></Link>
             <Link to="/blog"><li>Blog</li></Link>
-            <Link to="/about"><li>About Us</li></Link>
+            <Link to="/meeting"><li>Meeting</li></Link>
           </ul>
         </Nav>
         <ButtonGroup>
@@ -272,7 +271,7 @@ function Header() {
               {/* <Dropdown isOpen={isDropdownOpen}> */}
               <Dropdown $isOpen={isDropdownOpen}>
                 <UserInfo>
-                  <UserName>{user.name}</UserName>
+                  <UserName>{user.username}</UserName>
                   <UserEmail>{user.email}</UserEmail>
                 </UserInfo>
                 <DropdownItem to="/profile">
@@ -282,10 +281,6 @@ function Header() {
                 <DropdownItem to="/dashboard">
                 <LuLayoutDashboard />
                   Dashboard
-                </DropdownItem>
-                <DropdownItem to="/my-course">
-                <SlBookOpen />
-                  My course
                 </DropdownItem>
                 <Divider />
                 <DropdownItem  onClick={logout}>
@@ -321,7 +316,7 @@ function Header() {
             <li><Link to="/courses" onClick={toggleSidebar}>Courses</Link></li>
             <li><Link to="/career" onClick={toggleSidebar}>Careers</Link></li>
             <li><Link to="/blog" onClick={toggleSidebar}>Blog</Link></li>
-            <li><Link to="/about" onClick={toggleSidebar}>About Us</Link></li>
+            <li><Link to="/meeting" onClick={toggleSidebar}>Meeting</Link></li>
           </ul>
         </SidebarNav>
         

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const courseSchema = new mongoose.Schema({
+  // customId: { type: String, unique: true },
   title: String,
   image: String,
   tag: String,

@@ -5,8 +5,9 @@ const Container = styled.div`
   background-color: #e6f2ff;
   border-radius: 20px;
   padding: 20px;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 900px;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
 `;
 
 const RatingOverview = styled.div`

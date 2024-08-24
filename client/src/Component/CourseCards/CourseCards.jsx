@@ -95,29 +95,56 @@ function cropText(text, maxLength) {
 
 
 // Main component
-const CourseCards = ({ searchTerm }) => {
+const CourseCards = ({ searchTerm, subjectFilter }) => {
   const [courses, setCourses] = useState([]);
   const { user } = useAuth();
   const navigate = useNavigate();
 
 
+  // useEffect(() => {
+  //   const fetchCourses = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:8000/api/courses`);
+  //       const filteredCourses = searchTerm
+  //         ? response.data.filter((course) =>
+  //             course.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //           )
+  //         : response.data;
+  //       setCourses(filteredCourses);
+  //     } catch (error) {
+  //       console.error('Error fetching the courses:', error);
+  //     }
+  //   };
+  
+  //   fetchCourses();
+  // }, [searchTerm]);
+
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/courses`);
-        const filteredCourses = searchTerm
-          ? response.data.filter((course) =>
-              course.title.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-          : response.data;
+        let filteredCourses = response.data;
+
+        if (searchTerm) {
+          filteredCourses = filteredCourses.filter((course) =>
+            course.title.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }
+
+        if (subjectFilter && subjectFilter !== 'All') {
+          filteredCourses = filteredCourses.filter((course) =>
+            course.tag.toLowerCase().includes(subjectFilter.toLowerCase())
+          );
+        }
+
         setCourses(filteredCourses);
       } catch (error) {
         console.error('Error fetching the courses:', error);
       }
     };
-  
+
     fetchCourses();
-  }, [searchTerm]);
+  }, [searchTerm, subjectFilter]);
 
 
   const handleCardClick = (courseId) => {
@@ -148,7 +175,8 @@ const CourseCards = ({ searchTerm }) => {
   );
 };
 CourseCards.propTypes = {
-  searchTerm: PropTypes.string, // Define the expected prop type
+  searchTerm: PropTypes.string,
+  subjectFilter: PropTypes.string, // Define the expected prop type
 };
 export default CourseCards;
 

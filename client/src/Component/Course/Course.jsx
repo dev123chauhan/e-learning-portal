@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 const styleBg = {
     backgroundImage: `url(${bgCourse})`,
-    marginTop:"4rem"
+    marginTop:"5rem"
 };
 const Title = styled.h1`
   font-size: 24px;

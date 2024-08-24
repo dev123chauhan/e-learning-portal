@@ -61,10 +61,14 @@ const styleSearch ={
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
-
+  const [subjectFilter, setSubjectFilter] = useState('');
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
+  const handleSubjectSelect = (subject) => {
+    setSubjectFilter(subject);
+  };
+
   return (
     <>
     <SearchContainer>
@@ -73,14 +77,18 @@ const Search = () => {
     <SearchButton>Search</SearchButton></div>
        
     <FilterContainer>
-          <DropdownButton label="Subject" options={['Develo..', 'Program..', 'Design']} />
+    <DropdownButton 
+            label="Subject" 
+            options={['All', 'Development', 'Programming', 'Design']} 
+            onSelect={handleSubjectSelect}
+          />
           <DropdownButton label="Program" options={['Program 1', 'Program 2', 'Program 3']} />
           <DropdownButton label="Language" options={['English', 'Spanish', 'French']} />
           <DropdownButton label="Availability" options={['Available', 'Not Available']} />
           <DropdownButton label="Learning Type" options={['Self-paced', 'Instructor-led']} />
         </FilterContainer>
     </SearchContainer>
-    <CourseCards searchTerm={searchTerm}/>
+    <CourseCards searchTerm={searchTerm} subjectFilter={subjectFilter}/>
     </>
   );
 };

@@ -194,6 +194,55 @@ const coursesContent = [
     tag: "Mobile Development",
     duration: "4 Months",
     price: "$95"
+  },
+
+  {
+    id: 13,
+    image: "/images/photoshop.jpg",
+    title: "Adobe Photoshop",
+    description: "Master the art of photo editing and graphic design with Adobe Photoshop. This course covers everything from basic image editing techniques to advanced design and manipulation tools.",
+    bullets: [
+      "Introduction to Photoshop interface and tools",
+      "Basic image editing and retouching techniques",
+      "Working with layers and masks",
+      "Creating digital art and illustrations",
+      "Advanced photo manipulation and compositing"
+    ],
+    tag: "Design",
+    duration: "2 Months",
+    price: "$70"
+  },
+  {
+    id: 14,
+    image: "/images/illustrator.webp",
+    title: "Adobe Illustrator",
+    description: "Learn how to create stunning vector graphics and illustrations with Adobe Illustrator. This course is perfect for anyone looking to improve their graphic design skills and create professional-quality artwork.",
+    bullets: [
+      "Introduction to vector graphics and Illustrator tools",
+      "Creating logos, icons, and illustrations",
+      "Working with paths, shapes, and text",
+      "Designing complex vector artwork",
+      "Exporting designs for web and print"
+    ],
+    tag: "Design",
+    duration: "2 Months",
+    price: "$70"
+  },
+  {
+    id: 15,
+    image: "/images/figma.png",
+    title: "Figma for UI/UX Design",
+    description: "Get hands-on experience in UI/UX design with Figma, a powerful and collaborative design tool. This course covers everything from wireframing to prototyping and creating responsive designs.",
+    bullets: [
+      "Introduction to Figma interface and features",
+      "Wireframing and creating user flows",
+      "Designing responsive interfaces",
+      "Prototyping and interactive design",
+      "Collaborating and sharing designs in Figma"
+    ],
+    tag: "Design",
+    duration: "3 Months",
+    price: "$75"
   }
 ];
 

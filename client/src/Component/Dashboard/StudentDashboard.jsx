@@ -5,7 +5,6 @@ import {
   FiGrid,
   FiFileText,
   FiClock,
-  FiFolder,
   FiInbox,
   FiSettings,
   FiBell,
@@ -13,6 +12,8 @@ import {
 import { useState } from "react";
 import StatisticsSection from "./StatisticsSection";
 import Performance from "./Performance";
+import { SlBookOpen } from "react-icons/sl";
+import MyCourses from "../MyCourse/MyCourse";
 // import Performance from './Performace';
 
 const AppContainer = styled.div`
@@ -193,12 +194,14 @@ function StudentDashboard() {
         >
           <FiClock /> Reports
         </SidebarItem>
+   
         <SidebarItem
-          active={activeTab === "File Storage"}
-          onClick={() => setActiveTab("File Storage")}
+          active={activeTab === "My Course"}
+          onClick={() => setActiveTab("My Course")}
         >
-          <FiFolder /> File Storage
+           <SlBookOpen /> My Course
         </SidebarItem>
+ 
         <SidebarItem
           active={activeTab === "Inbox"}
           onClick={() => setActiveTab("Inbox")}
@@ -213,6 +216,10 @@ function StudentDashboard() {
         </SidebarItem>
       </Sidebar>
       <MainContent>
+      {activeTab === "My Course" ? (
+          <MyCourses />
+        ) :
+        <>
         <Header>
           <div>
             <h1>Hello {cropText(user?.username, 6)} 👋</h1>
@@ -245,7 +252,7 @@ function StudentDashboard() {
         <LeaderBoard>
           <h3>Leader Board</h3>
           {/* Add table component here */}
-        </LeaderBoard>
+        </LeaderBoard></>}
       </MainContent>
       <ProfileSidebar>
       <div style={stylePic}>
@@ -272,7 +279,20 @@ function StudentDashboard() {
             <input type="checkbox" />
             <span>Integrate API</span>
           </TodoItem>
-          {/* Add more todo items */}
+          <TodoItem>
+            <input type="checkbox" />
+            <span>Slicing Home Screen</span>
+          </TodoItem>
+          <TodoItem>
+            <input type="checkbox" />
+            <span>Research Objective User</span>
+          </TodoItem>
+          <TodoItem>
+            <input type="checkbox" />
+            <span>Report analysis P2P Business</span>
+          </TodoItem>
+         
+         
         </TodoList>
       </ProfileSidebar>
     </AppContainer>

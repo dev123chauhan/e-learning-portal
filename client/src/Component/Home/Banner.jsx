@@ -7,7 +7,7 @@ import profileIcon from "../../assets/userProfile.png"
 import mailIcon from "../../assets/email.png"
 import baseImageSrc from "../../assets/mailBox.png"
 import statsIcon from "../../assets/state.png"
-
+import { TypeAnimation } from 'react-type-animation';
 const HeroContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -37,22 +37,9 @@ const ContentArea = styled.div`
   }
 `;
 
-const Title = styled.h1`
-  font-size: 28px;
-  margin-bottom: 20px;
-  
-  span {
-    color: #FF7A00;
-  }
 
-  @media (min-width: 768px) {
-    font-size: 36px;
-  }
 
-  @media (min-width: 1024px) {
-    font-size: 48px;
-  }
-`;
+
 
 const Subtitle = styled.p`
   font-size: 14px;
@@ -233,12 +220,47 @@ const OverlayImage = styled.img`
   width: 60%;
   height: 60%;
 `;
+const Title = styled.h1`
+  font-size: 28px;
+  margin-bottom: 20px;
+  
+  span {
+    color: #FF7A00;
+    ${'' /* color: white; */}
+  }
+
+  @media (min-width: 768px) {
+    font-size: 36px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 48px;
+  }
+`;
+
+
+
 
 function Banner() {
   return (
     <HeroContainer>
       <ContentArea>
-        <Title><span>Studying</span> Online is now much easier</Title>
+      <Title>
+      <span>Studying</span> 
+      <TypeAnimation
+        sequence={[
+          ' Online is now much easier',
+          1000,
+          ' Online is more effective.',
+          1000,
+        ]}
+        speed={50}
+        style={{ color: 'white' }}  // Set the color to white
+        repeat={Infinity}
+      />
+    </Title>
+
+
         <Subtitle>TOTC is an interesting platform that will teach you in more an interactive way</Subtitle>
         <CTAGroup>
           <JoinButton>Join for free</JoinButton>

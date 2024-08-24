@@ -1,10 +1,12 @@
 // import courseDetailImage from "../../assets/courseDetailImg.png"
 import styled from 'styled-components';
+// import PropTypes from 'prop-types';
 import Rating from "./Rating";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Modal from './Modal';
+// import { FaCheck } from 'react-icons/fa'; 
 const Container = styled.div`
   ${'' /* max-width: 1200px; */}
   margin: 0 auto;
@@ -72,7 +74,8 @@ const TimeLeft = styled.p`
 const BuyNowButton = styled.button`
   width: 100%;
   padding: 7px;
-  background-color: #49BBBD;
+  background-color: ${props => props.disabled ? '#ccc' : '#49BBBD'};
+  cursor: ${props => props.disabled ? 'default' : 'pointer'};
   color: white;
   border: none;
   border-radius: 5px;
@@ -112,7 +115,8 @@ const ShareIcon = styled.div`
 const OverviewSection = styled.div`
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
 `;
 const OverviewButton = styled.button`
   padding: 10px 20px;
@@ -132,6 +136,7 @@ const Title = styled.h1`
 const Description = styled.p`
   font-size: 18px;
   margin-bottom: 20px;
+  width:1100px;
   color: #666;
 `;
 
@@ -146,11 +151,26 @@ const BulletPoint = styled.li`
   font-size: 16px;
   margin-bottom: 10px;
 `;
-
+const Content = styled.div`
+  margin-left: 2rem;
+`;
 function CourseDetail() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEnrolled, setIsEnrolled] = useState(false);
+
+  // const handleEnrollmentSuccess = () => {
+  //   setIsEnrolled(true);
+  // };
+
+
+  const handleEnrollmentSuccess = () => {
+    setIsEnrolled(true);
+    // localStorage.setItem(`isEnrolled_${id}`, true);
+  };
+
+
 
   useEffect(() => {
     const fetchCourseDetails = async () => {
@@ -163,6 +183,10 @@ function CourseDetail() {
     };
 
     fetchCourseDetails();
+    // const enrolled = localStorage.getItem(`isEnrolled_${id}`);
+    // if (enrolled) {
+    //   setIsEnrolled(true);
+    // }
   }, [id]);
 
   if (!course) return <div>Loading...</div>;
@@ -179,6 +203,8 @@ function CourseDetail() {
     <Container>
       <ImageSection>
         <MainImage src={`http://localhost:8000${course.image}`} alt={course.title} />
+
+        <Content>
     <Title>{course.title}</Title>
       <Description>{course.description}</Description>
       <BulletPoints>
@@ -186,6 +212,7 @@ function CourseDetail() {
           <BulletPoint key={index}>{bullet}</BulletPoint>
         ))}
       </BulletPoints>
+      </Content>
         <OverlayCard>
           <SmallImage src={`http://localhost:8000${course.image}`} alt={course.title} />
           <PriceSection>
@@ -194,8 +221,15 @@ function CourseDetail() {
             <Discount>50% Off</Discount>
           </PriceSection>
           <TimeLeft>11 hour left at this price</TimeLeft>
-          <BuyNowButton onClick={handleBuyNowClick}>Enroll Now</BuyNowButton>
-          <Modal isOpen={isModalOpen} onClose={handleCloseModal}/>
+          <BuyNowButton onClick={handleBuyNowClick} disabled={isEnrolled}>
+          {isEnrolled ? 'Enrolled' : 'Enroll Now'}
+        </BuyNowButton>
+        <Modal 
+          isOpen={isModalOpen} 
+          onClose={handleCloseModal}  
+          courseId={id}
+          onEnrollmentSuccess={handleEnrollmentSuccess}
+        />
           <h3>This Course included</h3>
           <CourseIncludes>
             <CourseItem>Money Back Guarantee</CourseItem>

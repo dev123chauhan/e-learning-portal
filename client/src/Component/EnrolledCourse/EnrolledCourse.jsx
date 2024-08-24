@@ -305,7 +305,7 @@ function EnrolledCourse() {
           </div>
         </Header>
         <VideoContainer>
-          <CourseTitle>THE FULL STACK REACT COURSE</CourseTitle>
+          <CourseTitle>Html Css & Javascript</CourseTitle>
           <Instructor>BUILD AND DEPLOY AN E-COMMERCE APP</Instructor>
           <VideoPlayerEnrolledCourse
             videoSrc={currentVideo.url}

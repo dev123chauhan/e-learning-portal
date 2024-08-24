@@ -16,6 +16,7 @@ const Container = styled.div`
   font-family: Arial, sans-serif;
   background-color: #f0f4f8;
   padding: 20px;
+  margin-top: 4rem;
 `;
 
 const LeftSection = styled.div`

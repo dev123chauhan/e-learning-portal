@@ -18,7 +18,7 @@ const Header = styled.div`
 
 const Title = styled.h2`
   font-size: 24px;
-  margin: 0;
+  margin-left: 3rem;
 `;
 
 const SeeAll = styled.a`
@@ -27,9 +27,13 @@ const SeeAll = styled.a`
 `;
 
 const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  ${'' /* display: grid; */}
+  ${'' /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */}
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
+  padding: 3rem
 `;
 
 const Card = styled.div`

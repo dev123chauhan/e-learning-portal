@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const FilterButton = styled.div`
   position: relative;
-  padding: 8px 12px;
+  padding: 8px 40px;
   font-size: 14px;
   background-color: white;
   border: 1px solid #ccc;
@@ -37,7 +37,7 @@ const DropdownItem = styled.div`
   }
 `;
 
-const DropdownButton = ({ label, options }) => {
+const DropdownButton = ({ label, options, onSelect }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedOption, setSelectedOption] = useState(label);
   const toggleDropdown = () => {
@@ -45,7 +45,8 @@ const DropdownButton = ({ label, options }) => {
   };
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    setShowDropdown(false); // Close the dropdown after selecting an option
+    setShowDropdown(false);
+    onSelect(option); // Close the dropdown after selecting an option
   };
   return (
     <FilterButton onClick={toggleDropdown}>
@@ -62,6 +63,7 @@ const DropdownButton = ({ label, options }) => {
 };
 DropdownButton.propTypes = {
     label: PropTypes.string.isRequired, // `label` must be a string and is required
-    options: PropTypes.arrayOf(PropTypes.string).isRequired, // `options` must be an array of strings and is required
+    options: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onSelect: PropTypes.func.isRequired, // `options` must be an array of strings and is required
   };
   export default DropdownButton

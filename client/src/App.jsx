@@ -25,8 +25,8 @@ export default function App() {
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/dashboard" element={<StudentDashboard />} />
         <Route path="/blog" element={<Layout><Blog /></Layout>} />
-        <Route path="/about" element={<Layout><Meeting /></Layout>} />
-        <Route path="/my-course" element={<EnrolledCourse />} />
+        <Route path="/meeting" element={<Layout><Meeting /></Layout>} />
+        <Route path="/enrolled-course-detail" element={<EnrolledCourse />} />
         <Route path="/course/:id" element={<Layout><CourseDetail /></Layout>} />
       </Routes>
     </>
