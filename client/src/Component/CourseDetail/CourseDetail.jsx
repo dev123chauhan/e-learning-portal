@@ -10,7 +10,6 @@ import Modal from './Modal';
 const Container = styled.div`
   ${'' /* max-width: 1200px; */}
   margin: 0 auto;
-  font-family: Arial, sans-serif;
 `;
 
 const ImageSection = styled.div`
@@ -199,6 +198,7 @@ function CourseDetail() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+ 
   return (
     <Container>
       <ImageSection>
@@ -228,6 +228,7 @@ function CourseDetail() {
           isOpen={isModalOpen} 
           onClose={handleCloseModal}  
           courseId={id}
+       
           onEnrollmentSuccess={handleEnrollmentSuccess}
         />
           <h3>This Course included</h3>

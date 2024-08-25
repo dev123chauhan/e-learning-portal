@@ -156,6 +156,7 @@ const CourseCards = ({ searchTerm, subjectFilter }) => {
       {courses.map(course => (
         <Card key={course.id} onClick={() => handleCardClick(course.id)}>
         <CardImage src={`http://localhost:8000${course.image}`} alt={course.title} />
+        {/* <CardImage src={`http://localhost:8000${course.image}`} alt={course.title} /> */}
           <CardBody>
           <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
           <Tag><RxDashboard fontSize={20}/>{course.tag}</Tag>
