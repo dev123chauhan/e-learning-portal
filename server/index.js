@@ -21,10 +21,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 const connection = mongoose.connection;
-connection.once("open", () => {
+connection.once("open", () => { 
   console.log("MongoDB database connection established successfully");
 });
-
+ 
 app.use('/api/contact', require('./routes/contact'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
