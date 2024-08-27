@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-// const AutoIncrement = require('mongoose-sequence')(mongoose);
-
 const CourseSchema = new mongoose.Schema({
   image: String,
   title: String, 
@@ -11,11 +9,13 @@ const CourseSchema = new mongoose.Schema({
   price: String
 });
 
-// CourseSchema.plugin(AutoIncrement, {inc_field: 'id'});
 
 module.exports = mongoose.model('Course', CourseSchema);
 
 
+
+// CourseSchema.plugin(AutoIncrement, {inc_field: 'id'});
+// const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 
 

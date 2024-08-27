@@ -30,7 +30,7 @@ router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     // Create a JWT token
-    const token = jwt.sign({ id: req.user.id }, 'YOUR_JWT_SECRET', { expiresIn: '3d' });
+    const token = jwt.sign({ id: req.user.id }, 'YOUR_JWT_SECRET', { expiresIn: '365d' });
     // Redirect to the frontend with the token
     res.redirect(`http://localhost:3000/login?token=${token}`);
   });
@@ -41,7 +41,7 @@ router.post('/auth/google', async (req, res) => {
   try {
     // Verify the Google token (you may want to use the google-auth-library for this)
     // For simplicity, we're just creating a new token here
-    const newToken = jwt.sign({ id: 'google_user_id' }, 'YOUR_JWT_SECRET', { expiresIn: '3d' });
+    const newToken = jwt.sign({ id: 'google_user_id' }, 'YOUR_JWT_SECRET', { expiresIn: '365d' });
     res.json({ token: newToken });
   } catch (error) {
     res.status(400).json({ error: 'Invalid token' });

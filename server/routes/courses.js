@@ -21,15 +21,36 @@ const insertCoursesIfEmpty = async () => {
 insertCoursesIfEmpty();
 
 // GET /api/courses - Get all courses
+// router.get('/courses', async (req, res) => {
+//   try {
+//     const courses = await Course.find();
+//     res.json(courses);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
+// GET /api/courses - Get all courses or search courses
 router.get('/courses', async (req, res) => {
   try {
-    const courses = await Course.find();
+    const { search } = req.query;
+    let courses;
+
+    if (search) {
+      courses = await Course.find({
+        $or: [
+          { name: { $regex: search, $options: 'i' } },
+          { description: { $regex: search, $options: 'i' } }
+        ]
+      });
+    } else {
+      courses = await Course.find();
+    }
+
     res.json(courses);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
-
 // GET /api/courses/:id - Get a specific course
 router.get('/courses/:id', async (req, res) => {
   try {

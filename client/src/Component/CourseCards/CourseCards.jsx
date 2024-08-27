@@ -96,36 +96,46 @@ function cropText(text, maxLength) {
 
 // Main component
 // const CourseCards = ({ searchTerm, subjectFilter }) => {
-const CourseCards = () => {
+const CourseCards = ({ searchTerm, subjectFilter }) => {
   const [courses, setCourses] = useState([]);
   const { user } = useAuth();
   const navigate = useNavigate();
 
 
   
-
-
-
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/courses');
-        setCourses(response.data);
-        console.log(response.data)
+        const response = await axios.get(`http://localhost:8000/api/courses`);
+        let filteredCourses = response.data;
+
+        if (searchTerm) {
+          filteredCourses = filteredCourses.filter((course) =>
+            course.title.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }
+
+        if (subjectFilter && subjectFilter !== 'All') {
+          filteredCourses = filteredCourses.filter((course) =>
+            course.tag.toLowerCase().includes(subjectFilter.toLowerCase())
+          );
+        }
+
+        setCourses(filteredCourses);
       } catch (error) {
-        // setError('Error fetching courses');
-        console.error('Error fetching courses:', error);
-      } finally {
-        // setLoading(false);
+        console.error('Error fetching the courses:', error);
       }
     };
 
     fetchCourses();
-  }, []);
+  }, [searchTerm, subjectFilter]);
+
+
+ 
 
 
   const handleCardClick = (courseId) => {
-    navigate(`/course/${courseId}`);
+    navigate(`/course/${courseId}`); 
   };
 
   return ( 
@@ -159,48 +169,3 @@ export default CourseCards;
 
 
 
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:8000/api/courses`);
-  //       let filteredCourses = response.data;
-
-  //       if (searchTerm) {
-  //         filteredCourses = filteredCourses.filter((course) =>
-  //           course.title.toLowerCase().includes(searchTerm.toLowerCase())
-  //         );
-  //       }
-
-  //       if (subjectFilter && subjectFilter !== 'All') {
-  //         filteredCourses = filteredCourses.filter((course) =>
-  //           course.tag.toLowerCase().includes(subjectFilter.toLowerCase())
-  //         );
-  //       }
-
-  //       setCourses(filteredCourses);
-  //     } catch (error) {
-  //       console.error('Error fetching the courses:', error);
-  //     }
-  //   };
-
-  //   fetchCourses();
-  // }, [searchTerm, subjectFilter]);
-
-
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:8000/api/courses${searchTerm ? `?search=${searchTerm}` : ''}`);
-  //       setCourses(response.data);
-  //     } catch (error) {
-  //       console.error('Error fetching the courses:', error);
-  //     }
-  //   };
-
-  //   const delayDebounceFn = setTimeout(() => {
-  //     fetchCourses();
-  //   }, 300);
-
-
-  //   return () => clearTimeout(delayDebounceFn);
-  // }, [searchTerm]);
