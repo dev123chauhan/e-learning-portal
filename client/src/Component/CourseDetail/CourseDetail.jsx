@@ -188,7 +188,6 @@ function CourseDetail() {
     // }
   }, [id]);
 
-  if (!course) return <div>Loading...</div>;
 
 
   const handleBuyNowClick = () => {
@@ -202,21 +201,20 @@ function CourseDetail() {
   return (
     <Container>
       <ImageSection>
-        <MainImage src={`http://localhost:8000${course.image}`} alt={course.title} />
-
+        <MainImage src={course?.image} alt={course?.title} />
         <Content>
-    <Title>{course.title}</Title>
-      <Description>{course.description}</Description>
+    <Title>{course?.title}</Title>
+      <Description>{course?.description}</Description>
       <BulletPoints>
-        {course.bullets && course.bullets.map((bullet, index) => (
+        {course?.bullets && course?.bullets.map((bullet, index) => (
           <BulletPoint key={index}>{bullet}</BulletPoint>
         ))}
       </BulletPoints>
       </Content>
         <OverlayCard>
-          <SmallImage src={`http://localhost:8000${course.image}`} alt={course.title} />
+          <SmallImage src={course?.image} alt={course?.title} />
           <PriceSection>
-            <CurrentPrice>{course.price}</CurrentPrice>
+            <CurrentPrice>{course?.price}</CurrentPrice>
             <OriginalPrice>$99.99</OriginalPrice>
             <Discount>50% Off</Discount>
           </PriceSection>

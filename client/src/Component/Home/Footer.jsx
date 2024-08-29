@@ -102,7 +102,7 @@ const Footer = () => {
       </SubscribeForm>
       
       <Links>
-        <Link to="/career">Careers</Link>
+        <Link to="/contact">Contact us</Link>
         <Link to="">Privacy Policy</Link>
         <Link to="">Terms & Conditions</Link>
       </Links>

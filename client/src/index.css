@@ -22,3 +22,8 @@ a{
   text-decoration: none;
   color: black;
 }
+
+/* In your CSS file */
+.instagramIcon {
+  color: orange;
+}

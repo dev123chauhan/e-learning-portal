@@ -11,6 +11,8 @@ import EnrolledCourse from "./Component/EnrolledCourse/EnrolledCourse";
 import StudentDashboard from "./Component/Dashboard/StudentDashboard";
 import Layout from "./Component/Layout/Layout";
 import Blog from "./Component/Blog/Blog";
+import PrivateRoute from "./Component/PrivateRoute/PrivateRoute";
+import Contact from "./Component/ContactUs/ContactUs";
 
 
 export default function App() {
@@ -20,14 +22,16 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Layout><Search /></Layout>} />
         <Route path="/auth" element={<AuthForm />} />
-        <Route path="/profile" element={<ProfileDashboard />} />
+        {/* <Route path="/profile" element={<ProfileDashboard />} /> */}
+        <Route path="/profile" element={<PrivateRoute element={ProfileDashboard} />} />
         <Route path="/career" element={<Layout><Course /></Layout>} />
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-        <Route path="/dashboard" element={<StudentDashboard />} />
+        {/* <Route path="/dashboard" element={<StudentDashboard />} /> */}
+        <Route path="/dashboard" element={<PrivateRoute element={StudentDashboard} />} />
         <Route path="/blog" element={<Layout><Blog /></Layout>} />
         <Route path="/meeting" element={<Layout><Meeting /></Layout>} />
-        <Route path="/enrolled-course-detail" element={<EnrolledCourse />} />
+        <Route path="/enrolled-course-detail" element={<PrivateRoute element={EnrolledCourse}/>} />
         <Route path="/course/:id" element={<Layout><CourseDetail /></Layout>} />
+        <Route path="/contact" element={<Layout><Contact /></Layout>} />
       </Routes>
     </>
   );

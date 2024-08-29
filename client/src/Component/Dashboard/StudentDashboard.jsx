@@ -14,6 +14,7 @@ import StatisticsSection from "./StatisticsSection";
 import Performance from "./Performance";
 import { SlBookOpen } from "react-icons/sl";
 import MyCourses from "../MyCourse/MyCourse";
+import Assignment from "../Assignments/Assignments";
 // import Performance from './Performace';
 
 const AppContainer = styled.div`
@@ -218,7 +219,9 @@ function StudentDashboard() {
       <MainContent>
       {activeTab === "My Course" ? (
           <MyCourses />
-        ) :
+        ) : activeTab ==="Assignment" ? (
+          <Assignment/>
+        ):
         <>
         <Header>
           <div>

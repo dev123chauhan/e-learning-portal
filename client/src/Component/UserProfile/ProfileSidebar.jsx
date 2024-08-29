@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import useAuth from "../../hooks/useAuth";
 import noProfile from "../../assets/noProfile.jpg";
+import {useNavigate} from "react-router-dom"
+
 import { FaUser, FaPencilAlt, FaImage, FaLock } from 'react-icons/fa';
 const SidebarContainer = styled.div`
   padding: 16px;
@@ -31,6 +33,7 @@ const Username = styled.h6`
 const NavList = styled.ul`
   list-style-type: none;
   padding: 0;
+  margin-bottom: 20rem;
 `;
 
 const NavItem = styled.li`
@@ -79,9 +82,11 @@ const Icon = styled.div`
 
 const ProfileSidebar = ({ activeTab, setActiveTab }) => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate()
 
   const handleLogout = () => {
-    logout(); // Call the logout function from useAuth
+    logout();
+    navigate("/") // Call the logout function from useAuth
   };
 
 

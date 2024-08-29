@@ -83,7 +83,7 @@ function MyCourses() {
           {enrolledCourses.map((course, index) => (
             <CourseCard key={course._id || index}>
               <Link to="/enrolled-course-detail">
-                <CourseImage src={`http://localhost:8000${course.image}`} alt={course.title || 'Course image'} />
+                <CourseImage src={course.image} alt={course.title || 'Course image'} />
                 <CourseInfo>
                   <CourseTitle>{course.title || 'Untitled Course'}</CourseTitle>
                   <CourseDescription>

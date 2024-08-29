@@ -99,7 +99,7 @@ function Modal({ isOpen, onClose, courseId, onEnrollmentSuccess  }) {
     try {
       const response = await axios.post('http://localhost:8000/api/enroll', {
         ...formData,
-        courseId: courseId,
+        courseId,
       });
       if (response.data.success) {
         setMessage('Enrollment successful!'); 

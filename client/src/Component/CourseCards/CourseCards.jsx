@@ -135,13 +135,17 @@ const CourseCards = ({ searchTerm, subjectFilter }) => {
 
 
   const handleCardClick = (courseId) => {
-    navigate(`/course/${courseId}`); 
+    if (courseId) {
+      navigate(`/course/${courseId}`);
+    } else {
+      console.error("Course ID is undefined");
+    }
   };
 
   return ( 
     <CardGrid>
       {courses.map(course => (
-        <Card key={course.id} onClick={() => handleCardClick(course.id)}>
+        <Card key={course?._id} onClick={() => handleCardClick(course?._id)}>
         <CardImage src={course.image} alt={course.image} />
           <CardBody>
           <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
