@@ -1,4 +1,6 @@
 import { Table } from 'antd';
+import FirstAssignment from './FirstAssignment';
+import { useState } from 'react';
 // const AssignmentItem = styled.div`
 //   display: flex;
 //   align-items: center;
@@ -11,6 +13,7 @@ import { Table } from 'antd';
 // `;
 
 const Assignment = () => {
+  const [selectedAssignment, setSelectedAssignment] = useState(null);
   const assignments = [
     { id: 1, title: 'HTML Basics - Document Structure', dueDate: '2024-09-05', completed: false },
     { id: 2, title: 'HTML Forms and Input Elements', dueDate: '2024-09-08', completed: false },
@@ -50,6 +53,16 @@ const Assignment = () => {
     },
   ];
 
+  const handleRowClick = (record) => {
+    if (record.id === 1) {
+      setSelectedAssignment(record.id); // Set the state to the clicked assignment's id
+    }
+  };
+
+  if (selectedAssignment === 1) {
+    return <FirstAssignment />; // Render the new component when the first assignment is clicked
+  }
+
 
   return (
     <div style={{ padding: '20px' }}>
@@ -59,6 +72,9 @@ const Assignment = () => {
       dataSource={assignments} 
       rowKey="id"
       pagination={{ pageSize: 10 }}
+      onRow={(record) => ({
+          onClick: () => handleRowClick(record),
+        })}
     />
   </div>
   );

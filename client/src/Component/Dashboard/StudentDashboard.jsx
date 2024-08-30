@@ -5,16 +5,17 @@ import {
   FiGrid,
   FiFileText,
   FiClock,
-  FiInbox,
   FiSettings,
   FiBell,
 } from "react-icons/fi";
+import { MdOutlineQuiz } from "react-icons/md";
 import { useState } from "react";
 import StatisticsSection from "./StatisticsSection";
 import Performance from "./Performance";
 import { SlBookOpen } from "react-icons/sl";
 import MyCourses from "../MyCourse/MyCourse";
 import Assignment from "../Assignments/Assignments";
+import Mcqs from "../Mcqs/Mcqs";
 // import Performance from './Performace';
 
 const AppContainer = styled.div`
@@ -204,10 +205,10 @@ function StudentDashboard() {
         </SidebarItem>
  
         <SidebarItem
-          active={activeTab === "Inbox"}
-          onClick={() => setActiveTab("Inbox")}
+          active={activeTab === "Quiz"}
+          onClick={() => setActiveTab("Quiz")}
         >
-          <FiInbox /> Inbox
+          <MdOutlineQuiz /> Quiz
         </SidebarItem>
         <SidebarItem
           active={activeTab === "Settings"}
@@ -221,7 +222,9 @@ function StudentDashboard() {
           <MyCourses />
         ) : activeTab ==="Assignment" ? (
           <Assignment/>
-        ):
+        ): activeTab ==="Quiz" ? (
+          <Mcqs/>
+        ) :
         <>
         <Header>
           <div>
