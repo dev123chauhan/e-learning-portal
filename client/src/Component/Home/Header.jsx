@@ -21,8 +21,8 @@ const HeaderContainer = styled.header`
   box-shadow: ${({ $scrolled }) => ($scrolled ? '0 2px 10px rgba(0,0,0,0.1)' : 'none')};
   opacity: 1;
 
-  @media (max-width: 768px) {
-    padding: 20px;
+  @media (max-width: 992px) {
+    padding:10px;
   }
 `;
 
@@ -63,11 +63,25 @@ const ButtonGroup = styled.div`
     display: none;
   }
 `;
-
+const ButtonGroupSidebar = styled.div`
+  button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+`;
 const LoginButton = styled.button`
   background-color: ${({ scrolled }) => (scrolled ? '#53bfba' : 'white')};
   color: ${({ scrolled }) => (scrolled ? 'white' : '#53bfba')};
 `;
+const LoginButtonSideBar = styled.button`
+  background-color: #53bfba;
+  color: white;
+`;
+
 
 
 
@@ -139,6 +153,9 @@ const UserInfo = styled.div`
   padding: 15px 20px;
   border-bottom: 1px solid #e0e0e0;
 `;
+const UserProfile = styled.div`
+  display: none;
+`;
 
 const UserName = styled.h4`
   margin: 0;
@@ -175,7 +192,7 @@ const Sidebar = styled.div`
   background-color: white;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   transition: left 0.3s ease;
-  z-index: 1001;
+  z-index: 2000;
   padding: 20px;
 `;
 
@@ -207,6 +224,7 @@ const SidebarNav = styled.nav`
     }
   }
 `;
+
 
 function Header() {
   const { user, logout } = useAuth();
@@ -260,7 +278,7 @@ function Header() {
             <Link to="/meeting"><li>Meeting</li></Link>
           </ul>
         </Nav>
-        <ButtonGroup>
+        <>
           {user ? (
             <ProfileContainer ref={dropdownRef}>
               <ProfileImage
@@ -290,16 +308,16 @@ function Header() {
               </Dropdown>
             </ProfileContainer>
           ) : (
-            <>
+            <ButtonGroup>
               <Link to="/auth">
                 <LoginButton scrolled={scrolled}>Login</LoginButton>
               </Link>
               <Link to="/auth">
                 <SignUpButton>Sign Up</SignUpButton>
               </Link>
-            </>
+            </ButtonGroup>
           )}
-        </ButtonGroup>
+        </>
         <HamburgerButton onClick={toggleSidebar}>
           <FaBars />
         </HamburgerButton>
@@ -307,6 +325,7 @@ function Header() {
 
 
       <Sidebar $isOpen={isSidebarOpen}>
+      <Logo>E-learning</Logo>
         <SidebarCloseButton onClick={toggleSidebar}>
           <FaTimes />
         </SidebarCloseButton>
@@ -321,7 +340,7 @@ function Header() {
         </SidebarNav>
         
         {user ? (
-          <>
+          <UserProfile>
             <DropdownItem to="/profile" onClick={toggleSidebar}>
               <FaUser />
               My Profile
@@ -334,16 +353,16 @@ function Header() {
               <FaSignOutAlt />
               Logout
             </DropdownItem>
-          </>
+          </UserProfile>
         ) : (
-          <>
+          <ButtonGroupSidebar>
             <Link to="/auth" onClick={toggleSidebar}>
-            <LoginButton>Login</LoginButton>
+            <LoginButtonSideBar>Login</LoginButtonSideBar>
             </Link>
             <Link to="/auth" onClick={toggleSidebar}>
               <SignUpButton>Sign Up</SignUpButton>
             </Link>
-          </>
+          </ButtonGroupSidebar>
         )}
       </Sidebar>
     </>

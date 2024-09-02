@@ -48,15 +48,36 @@ const ForgotPassword = styled.a`
   font-size: 14px;
 `;
 
+// const Checkbox = styled.div`
+//   display: flex;
+//   align-items: center;
+//   margin-bottom: 15px;
+//   justify-content: space-between;
+
+//   input {
+//     margin-right: 10px;
+//   }
+// `;
+
 const Checkbox = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  justify-content: space-between;
 
   input {
     margin-right: 10px;
   }
+
+  label {
+    margin-right: auto;
+  }
+
+  a {
+    margin-left: auto;
+  }
 `;
+
 const InputWrapper = styled.div`
   position: relative;
 `;
