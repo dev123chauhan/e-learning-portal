@@ -22,6 +22,11 @@ const Nav = styled.nav`
 const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
 `;
 
 const NavLinks = styled.div`
@@ -162,7 +167,7 @@ const ButtonGroup = styled.div`
   }
 
   @media (max-width: 768px) {
-    display: none;
+    ${'' /* display: none; */}
   }
 `;
 
@@ -205,7 +210,12 @@ const Navigation = () => {
 
   return (
     <Nav>
+     <MenuIcon onClick={toggleSidebar}>
+        {" "}
+        <FaBars />
+      </MenuIcon>
       <Logo>E-learning</Logo>
+
       <NavLinks>
         <NavLink>
           <Link to="/">Home</Link>
@@ -267,12 +277,13 @@ const Navigation = () => {
           </Link>
         </ButtonGroup>
       )}
-      <MenuIcon onClick={toggleSidebar}>
+      {/* <MenuIcon onClick={toggleSidebar}>
         {" "}
         <FaBars />
-      </MenuIcon>
+      </MenuIcon> */}
       <Sidebar isOpen={isSidebarOpen}>
         <SidebarContent>
+      <Logo>E-learning</Logo>
           <CloseIcon onClick={toggleSidebar}>
             {" "}
             <FaTimes />

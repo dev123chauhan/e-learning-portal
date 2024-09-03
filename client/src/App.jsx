@@ -13,11 +13,14 @@ import Layout from "./Component/Layout/Layout";
 import Blog from "./Component/Blog/Blog";
 import PrivateRoute from "./Component/PrivateRoute/PrivateRoute";
 import Contact from "./Component/ContactUs/ContactUs";
+import ScrollToTop from "react-scroll-to-top";
+import { FaArrowUp } from "react-icons/fa";
 
 
 export default function App() {
   return (
     <>
+     <ScrollToTop className="scrollToTop" smooth component={<FaArrowUp className="upArrow"/>}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Layout><Search /></Layout>} />
