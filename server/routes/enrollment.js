@@ -55,6 +55,24 @@ router.get("/enrolled-courses", async (req, res) => {
   }
 });
 
+router.delete('/enrolled-courses/:courseId', async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    // In a real application, you'd get the user email from the authenticated session
+    // For this example, we'll remove the first matching enrollment
+    const result = await Enrollment.findOneAndDelete({ courseId });
+
+    if (result) {
+      res.json({ success: true, message: 'Enrollment removed successfully' });
+    } else {
+      res.status(404).json({ success: false, message: 'Enrollment not found' });
+    }
+  } catch (error) {
+    console.error("Error removing enrollment:", error);
+    res.status(500).json({ success: false, message: 'Error removing enrollment', error: error.message });
+  }
+});
+
 module.exports = router;
 
 

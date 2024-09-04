@@ -8,6 +8,7 @@ const userRoutes = require("./routes/users");
 const coursesRoute = require("./routes/courses");
 const googleRoute = require("./routes/google")
 const enrollmentRoutes = require('./routes/enrollment');
+const subscribeRoutes = require('./routes/subscribe');
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
@@ -26,6 +27,7 @@ connection.once("open", () => {
 });
  
 app.use('/api/contact', require('./routes/contact'));
+app.use('/api/subscribe', subscribeRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 app.use("/api", userRoutes);
