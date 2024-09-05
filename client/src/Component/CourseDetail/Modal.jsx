@@ -3,6 +3,8 @@ import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 const zoomIn = keyframes`
   from {
     transform: scale(0.7);
@@ -83,7 +85,7 @@ function Modal({ isOpen, onClose, courseId, onEnrollmentSuccess  }) {
     email: '',
     duration: '',
   });
-
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
 
   if (!isOpen) return null;
@@ -94,6 +96,7 @@ function Modal({ isOpen, onClose, courseId, onEnrollmentSuccess  }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     console.log('Form Data:', formData);
     console.log('Course ID:', courseId);
     try {
@@ -112,6 +115,8 @@ function Modal({ isOpen, onClose, courseId, onEnrollmentSuccess  }) {
       }
     } catch (error) {
       setMessage(error.response?.data?.message || 'Enrollment failed. Please try again.');
+    }finally {
+      setIsLoading(false);
     }
   };
 
@@ -136,7 +141,7 @@ function Modal({ isOpen, onClose, courseId, onEnrollmentSuccess  }) {
           <Label htmlFor="duration">Course Duration</Label>
           <InputField id="duration" type="text" required value={formData.duration} onChange={handleChange} />
 
-          <SubmitButton type="submit">Submit</SubmitButton>
+          <SubmitButton type="submit"> {isLoading ?  <Spin indicator={<LoadingOutlined style={{ color: '#ffffff' }} spin  />}  /> : 'Submit'}</SubmitButton>
         </Form>
       </ModalContent>
     </ModalOverlay>

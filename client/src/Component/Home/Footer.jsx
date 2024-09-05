@@ -124,7 +124,7 @@ const Footer = () => {
           placeholder="Your Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
-        <SubscribeButton type="submit"> {isLoading ?  <Spin indicator={<LoadingOutlined style={{ color: '#ffffff', margin: "auto" }} spin  />}  /> : 'Subscribe'}</SubscribeButton>
+        <SubscribeButton type="submit"> {isLoading ?  <Spin indicator={<LoadingOutlined style={{ color: '#ffffff', marginLeft: "20px", marginRight:"20px" }} spin  />}  /> : 'Subscribe'}</SubscribeButton>
       </SubscribeForm>
       
       <Links>

@@ -202,7 +202,8 @@ function MyCourses() {
                 </Dropdown>,
               ]}
             >
-              <Link to={`/enrolled-course-detail/${course._id}`}>
+              {/* <Link to={`/enrolled-course-detail/${course._id}`}>  */}
+              <Link to="/enrolled-course-detail">
                 <Meta
                   title={course.title || "Untitled Course"}
                   description={

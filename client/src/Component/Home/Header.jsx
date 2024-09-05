@@ -29,6 +29,15 @@ const HeaderContainer = styled.header`
 const Logo = styled.div`
   font-size: 24px;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    display:none;
+  }
+`;
+
+const LogoSideBar = styled.div`
+ font-size: 24px;
+ font-weight: bold;
 `;
 
 const Nav = styled.nav`
@@ -60,11 +69,12 @@ const ButtonGroup = styled.div`
   }
 
   @media (max-width: 768px) {
-    display: none;
+    ${'' /* display: none; */}
   }
 `;
 const ButtonGroupSidebar = styled.div`
   button {
+    
     margin-top: 10px;
     padding: 10px 20px;
     border-radius: 20px;
@@ -268,6 +278,9 @@ function Header() {
   return (
     <>
       <HeaderContainer $scrolled={scrolled}>
+      <HamburgerButton onClick={toggleSidebar}>
+          <FaBars />
+        </HamburgerButton>
         <Logo>E-learning</Logo>
         <Nav>
           <ul>
@@ -303,7 +316,7 @@ function Header() {
                 <Divider />
                 <DropdownItem  onClick={logout}>
                   <FaSignOutAlt />
-                  Logout
+                  <Link to="/auth">Logout</Link> 
                 </DropdownItem>
               </Dropdown>
             </ProfileContainer>
@@ -318,14 +331,14 @@ function Header() {
             </ButtonGroup>
           )}
         </>
-        <HamburgerButton onClick={toggleSidebar}>
+        {/* <HamburgerButton onClick={toggleSidebar}>
           <FaBars />
-        </HamburgerButton>
+        </HamburgerButton> */}
       </HeaderContainer>
 
 
       <Sidebar $isOpen={isSidebarOpen}>
-      <Logo>E-learning</Logo>
+      <LogoSideBar>E-learning</LogoSideBar>
         <SidebarCloseButton onClick={toggleSidebar}>
           <FaTimes />
         </SidebarCloseButton>
@@ -351,7 +364,7 @@ function Header() {
             </DropdownItem>
             <DropdownItem  onClick={() => { logout(); toggleSidebar(); }}>
               <FaSignOutAlt />
-              Logout
+             <Link to="/auth">Logout</Link> 
             </DropdownItem>
           </UserProfile>
         ) : (

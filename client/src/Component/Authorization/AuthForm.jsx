@@ -205,8 +205,8 @@ const AuthForm = () => {
     <Container>
       <ImageContainer>
         <TextOverlay>
-          <h2>Unlock Your Learning Potential</h2>
-          <p>Explore courses, develop new skills, and achieve your goals with our E-learning platform.</p>
+          {/* <h2>Unlock Your Learning Potential</h2>
+          <p>Explore courses, develop new skills, and achieve your goals with our E-learning platform.</p> */}
         </TextOverlay>
       </ImageContainer>
       <FormContainer>

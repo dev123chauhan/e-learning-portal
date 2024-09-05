@@ -85,6 +85,12 @@ const ProfileContainer = styled.div`
   position: relative;
 `;
 
+const ProfileContainerSidebar = styled.div`
+  display: none;
+
+`;
+
+
 const ProfileImage = styled.img`
   border-radius: 50%;
   width: 45px;
@@ -180,6 +186,29 @@ const SignUpButton = styled.button`
   background-color: #53bfba;
   color: white;
   border: 1px solid #53bfba !important;
+`;
+
+const LogoSideBar = styled.div`
+ font-size: 24px;
+ font-weight: bold;
+`;
+
+const ButtonGroupSidebar = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    ${'' /* margin-right: 10px; */}
+  }
+`;
+const LoginButtonSideBar = styled.button`
+  background-color: #53bfba;
+  color: white;
 `;
 
 const Navigation = () => {
@@ -283,7 +312,7 @@ const Navigation = () => {
       </MenuIcon> */}
       <Sidebar isOpen={isSidebarOpen}>
         <SidebarContent>
-      <Logo>E-learning</Logo>
+        <LogoSideBar>E-learning</LogoSideBar>
           <CloseIcon onClick={toggleSidebar}>
             {" "}
             <FaTimes />
@@ -304,7 +333,7 @@ const Navigation = () => {
             <Link to="/meeting">Meeting</Link>
           </NavLink>
           {user ? (
-            <ProfileContainer ref={dropdownRef}>
+            <ProfileContainerSidebar ref={dropdownRef}>
               <ProfileImage
                 onClick={toggleDropdown}
                 alt={user.name}
@@ -334,16 +363,16 @@ const Navigation = () => {
                   Logout
                 </DropdownItem>
               </Dropdown>
-            </ProfileContainer>
+            </ProfileContainerSidebar>
           ) : (
-            <ButtonGroup>
-              <LoginButton>
-                <Link to="/auth">Login</Link>
-              </LoginButton>
-              <SignUpButton>
-                <Link to="/auth">Sign Up</Link>
-              </SignUpButton>
-            </ButtonGroup>
+            <ButtonGroupSidebar>
+            <Link to="/auth" onClick={toggleSidebar}>
+            <LoginButtonSideBar>Login</LoginButtonSideBar>
+            </Link>
+            <Link to="/auth" onClick={toggleSidebar}>
+              <SignUpButton>Sign Up</SignUpButton>
+            </Link>
+          </ButtonGroupSidebar>
           )}
         </SidebarContent>
       </Sidebar>

@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import VideoPlayerEnrolledCourse from './VideoPlayer';
-import video1 from "../../assets/html css.mp4"
-import video2 from "../../assets/html css 2.mp4"
+import video1 from "../../assets/Introduction to Web Development __ Setup __ Part 1.mp4"
+import video2 from "../../assets/understanding web browser.mp4"
 import video3 from "../../assets/html css 3.mp4"
 import video4 from "../../assets/html css 4.mp4"
 import { FiBook } from "react-icons/fi";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdOutlineKeyboardArrowRight, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import PropTypes from 'prop-types';
-
 const PageContainer = styled.div`
   display: flex;
   height: 100vh;

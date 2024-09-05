@@ -7,6 +7,7 @@ import { ClipLoader } from "react-spinners";
 import useAuth from "../../hooks/useAuth";
 import { FaRegEyeSlash, FaRegEye  } from "react-icons/fa";
 import { GoogleLogin } from 'react-google-login';
+import { FcGoogle } from "react-icons/fc";
 const Form = styled.form` 
   display: flex;
   flex-direction: column;
@@ -35,6 +36,7 @@ const Button = styled.button`
   cursor: pointer;
   transition: background-color 0.3s;
   font-size: 16px;
+  margin-bottom: 10px;
 
   ${'' /* &:hover {
     background-color: #53BFBA;
@@ -93,7 +95,11 @@ const ShowPasswordIcon = styled.div`
 `;
 const GoogleButton = styled(Button)`
   background-color: white;
+  display: flex;
+  align-items: center;
+  gap:10px;
   color: black;
+  margin: auto;
 `;
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
@@ -170,7 +176,8 @@ export default function LoginForm() {
           clientId="YOUR_GOOGLE_CLIENT_ID"
           render={renderProps => (
             <GoogleButton onClick={renderProps.onClick} disabled={renderProps.disabled}>
-              Login with Google
+           <FcGoogle size={30}/>
+           Login with Google
             </GoogleButton>
           )}
           onSuccess={handleGoogleSuccess}
